@@ -4,13 +4,63 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bukoonde - Encontre a Escola Perfeita em Segundos</title>
+    <title>Bukoonde</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="style/style.css">
-    <script src="script/script.js"></script>
+    <link rel="stylesheet" href="/style/style.css">
+    <link rel="stylesheet" href="/style/modal.css">
+    <link rel="shortcut icon" href="images/Exclude.svg" type="image/x-icon">
+    <script src="/script/script.js"></script>
 </head>
 
 <body>
+    <!-- Modal de plataforma inacabada -->
+    <div id="incompleteModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Plataforma em Desenvolvimento</h2>
+                <button class="close-btn" onclick="closeModal('incompleteModal')">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p>Estamos trabalhando arduamente para trazer a você a melhor experiência possível. No momento, algumas
+                    funcionalidades ainda estão em desenvolvimento.</p>
+                <p>Pedimos desculpas pelo inconveniente e agradecemos sua compreensão.</p>
+                <p>Quer ser notificado quando lançarmos oficialmente?</p>
+                <div style="margin-top: 20px;">
+                    <input type="email" placeholder="Seu melhor e-mail"
+                        style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 6px; margin-bottom: 10px;">
+                    <button class="modal-btn modal-btn-primary" style="width: 100%;">
+                        <span class="loading-spinner" style="display: none;"></span>
+                        Me avise quando estiver pronto
+                    </button>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="modal-btn modal-btn-primary" onclick="closeModal('incompleteModal')">Entendi</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de vídeo -->
+    <div id="videoModal" class="modal video-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Como a Bukoonde funciona</h2>
+                <button class="close-btn" onclick="closeModal('videoModal')">&times;</button>
+            </div>
+            <div class="modal-body" style="padding: 0;">
+                <div class="video-container">
+                    <!-- Vídeo placeholder - substitua pelo seu vídeo real -->
+                    <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ?rel=0" frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowfullscreen></iframe>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="modal-btn modal-btn-primary" onclick="closeModal('videoModal')">Fechar</button>
+            </div>
+        </div>
+    </div>
+
     <div class="head">
         <div class="mail-phone">
             <div class="phone">
@@ -59,7 +109,8 @@
                     <li><a href="#solucions">Nossas Soluções</a></li>
                     <li><a href="#team">Equipe</a></li>
 
-                    <button class="btn-started">Começar agora <img src="/icons/move-right.svg" alt=""></button>
+                    <button onclick="alertModalIncomplete()" class="btn-started">Começar agora <img
+                            src="/icons/move-right.svg" alt=""></button>
                 </ul>
             </div>
         </header>
@@ -70,12 +121,12 @@
                     estudantes encontram escolas e escolhem cursos</p>
 
                 <div class="btn-actions">
-                    <button class="btn-started">
+                    <button class="btn-started" onclick="alertModalIncomplete()">
                         Descubrir escolas
                         <img src="/icons/move-right-blue.svg" alt="">
                     </button>
 
-                    <button class="btn-watch">
+                    <button class="btn-watch" onclick="watchVideo()">
                         <img src="/icons/circle-play.svg" alt="">
                         Ver como funciona
                     </button>
@@ -114,12 +165,14 @@
 
             <div class="item">
                 <h3>Escolhas Inadequadas</h3>
-                <span>Falta de orientação personalizada leva a decisões erradas sobre cursos, desperdiçando tempo e recursos.</span>
+                <span>Falta de orientação personalizada leva a decisões erradas sobre cursos, desperdiçando tempo e
+                    recursos.</span>
             </div>
 
             <div class="item">
                 <h3>Informações Dispersas</h3>
-                <span>Dados sobre escolas estão espalhados, dificultando comparações e tomada de decisões informadas.</span>
+                <span>Dados sobre escolas estão espalhados, dificultando comparações e tomada de decisões
+                    informadas.</span>
             </div>
         </div>
     </div>
@@ -241,7 +294,8 @@
             <div class="item">
                 <img src="/icons/brain.svg" alt="">
                 <h3>Orientação Inteligente</h3>
-                <span>Sugestões personalizadas de cursos baseadas no perfil, habilidades e objetivos do estudante.</span>
+                <span>Sugestões personalizadas de cursos baseadas no perfil, habilidades e objetivos do
+                    estudante.</span>
             </div>
 
             <div class="line"></div>
@@ -260,7 +314,7 @@
 
         <div class="teams">
             <div class="team">
-                <img src="/images/image-fidel.jpeg" alt="">
+                <img src="/images/eclesiastes.enc" alt="">
                 <h3>Eclesiaste Vaz</h3>
                 <p>Co-fundador</p>
                 <span>Desenvolvedor Mobile e <br> Back-End, CEO.</span>
@@ -274,14 +328,14 @@
             </div>
 
             <div class="team">
-                <img src="/images/image-fidel.jpeg" alt="">
+                <img src="/images/bernanbé.enc" alt="">
                 <h3>Bernabé Manuel</h3>
                 <p>Co-fundador</p>
                 <span>Desenvolvedor Front-End, <br> COO, CMO</span>
             </div>
 
             <div class="team">
-                <img src="/images/image-fidel.jpeg" alt="">
+                <img src="/images/lucilio.jpeg" alt="">
                 <h3>Lucílio Evanilsonl</h3>
                 <p>Social Media</p>
                 <span>Gestor de Produto</span>
