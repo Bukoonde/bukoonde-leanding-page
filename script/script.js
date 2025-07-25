@@ -1,39 +1,33 @@
 // Espera o DOM estar completamente carregado
 document.addEventListener('DOMContentLoaded', function() {
-    // Cache de elementos
     const emailBtn = document.querySelector('#incompleteModal .modal-btn-primary');
     const incompleteModal = document.getElementById('incompleteModal');
     const videoModal = document.getElementById('videoModal');
 
-    // Função para mostrar modal
     function showModal(modal) {
         if (!modal) return;
         
         modal.classList.add('show');
         document.body.style.overflow = 'hidden';
         
-        // Foco no primeiro elemento interativo para acessibilidade
         const focusable = modal.querySelector('button, [href], input, select, textarea');
         if (focusable) focusable.focus();
     }
 
-    // Função para fechar modal
     function closeModal(modal) {
         if (!modal) return;
         
         modal.classList.remove('show');
         document.body.style.overflow = 'auto';
         
-        // Pausa vídeo se for a modal de vídeo
         if (modal.id === 'videoModal') {
             const iframe = modal.querySelector('iframe');
             if (iframe) {
-                iframe.src = iframe.src; // Reinicia o vídeo
+                iframe.src = iframe.src;
             }
         }
     }
 
-    // Funções específicas para cada modal
     function alertModalIncomplete() {
         showModal(incompleteModal);
     }
@@ -42,7 +36,6 @@ document.addEventListener('DOMContentLoaded', function() {
         showModal(videoModal);
     }
 
-    // Evento de clique no botão de e-mail
     if (emailBtn) {
         emailBtn.addEventListener('click', function() {
             const btn = this;
@@ -54,7 +47,6 @@ document.addEventListener('DOMContentLoaded', function() {
             spinner.style.display = 'inline-block';
             btn.innerHTML = '<span class="loading-spinner"></span> Enviando...';
             
-            // Simulação de envio
             setTimeout(() => {
                 spinner.style.display = 'none';
                 btn.innerHTML = 'Obrigado! Te avisaremos.';
@@ -68,7 +60,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Fechar modal ao clicar fora
     document.addEventListener('click', function(event) {
         if (event.target.classList.contains('modal')) {
             const modals = document.querySelectorAll('.modal.show');
@@ -78,7 +69,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    // Fechar com ESC
     document.addEventListener('keydown', function(event) {
         if (event.key === "Escape") {
             const modals = document.querySelectorAll('.modal.show');
@@ -88,7 +78,34 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    // Torna as funções disponíveis globalmente se necessário
     window.alertModalIncomplete = alertModalIncomplete;
     window.watchVideo = watchVideo;
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+    const header = document.querySelector('.header-main');
+    const head = document.querySelector('.head');
+    const containerHero = document.querySelector('.container-hero');
+    let lastScroll = 0;
+
+    window.addEventListener('scroll', function() {
+        const currentScroll = window.pageYOffset;
+        
+        if (currentScroll > 100) { // Quando rolar mais de 100px
+            header.classList.add('fixed-header');
+            head.classList.add('fixed-head');
+            
+            if (currentScroll > lastScroll) {
+                header.classList.add('header-shadow');
+            } else {
+                header.classList.remove('header-shadow');
+            }
+        } else {
+            header.classList.remove('fixed-header');
+            head.classList.remove('fixed-head');
+            header.classList.remove('header-shadow');
+        }
+        
+        lastScroll = currentScroll;
+    });
 });
