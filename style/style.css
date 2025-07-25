@@ -616,14 +616,14 @@ body {
 }
 
 .container-download {
-    width: 70%;
-    padding: 80px 60px;
+   
+    padding: 50px 60px;
     margin: 150px auto;
     display: flex;
     background: rgb(32, 133, 248, .1);
     align-items: center;
-    justify-content: space-between;
-    border-radius: 10px;
+    justify-content: center;
+    gap: 150px;
 
     .content-download {
         h2 {
@@ -668,6 +668,27 @@ body {
                     }
                 }
             }
+        }
+    }
+
+    .app {
+        display: flex;
+        gap: 50px;
+
+        .image1, .image2 {
+            width: 200px;
+            height: 400px;
+            background-position: center;
+            background-size: cover;
+            background-repeat: no-repeat;
+        }
+
+        .image1 {
+            background-image: url('../images/Group 24.png');
+        }
+
+        .image2 {
+            background-image: url('../images/image-login.png');
         }
     }
 }
