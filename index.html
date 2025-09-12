@@ -1,41 +1,537 @@
 <!DOCTYPE html>
-<html lang="pt">
+<html lang="pt-AO" data-theme="dark">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bukoonde</title>
+    <meta name="description"
+        content="Bukoonde - Conectando estudantes às melhores instituições de ensino em Angola através de tecnologia inteligente">
+    <meta name="keywords"
+        content="educação Angola, escolas Angola, cursos Angola, orientação vocacional, plataforma educacional">
+    <meta name="author" content="Bukoonde">
+    <meta property="og:title" content="Bukoonde - Encontre a Escola Perfeita em Angola">
+    <meta property="og:description"
+        content="Plataforma inovadora que conecta estudantes às instituições de ensino ideais em Angola">
+    <meta property="og:image" content="https://bukoonde.com/images/og-image.jpg">
+    <meta property="og:url" content="https://bukoonde.com">
+    <meta name="twitter:card" content="summary_large_image">
+
+    <title>Bukoonde - Conectando Estudantes às Melhores Escolas em Angola</title>
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="/style/style.css">
-    <link rel="stylesheet" href="/style/modal.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
     <link rel="shortcut icon" href="images/Exclude.svg" type="image/x-icon">
-    <script src="/script/script.js"></script>
+
+    <link rel="stylesheet" href="/style/style.css">
+    <link rel="stylesheet" href="/style/dark-theme.css" id="theme-stylesheet">
 </head>
 
 <body>
-    <!-- Modal de plataforma inacabada -->
+    <!-- Top Bar -->
+    <div class="top-bar">
+        <div class="container top-bar-content">
+            <div class="contact-info">
+                <div class="contact-item">
+                    <img src="icons/phone-white.svg" alt="Telefone">
+                    <span>+244 923 456 789</span>
+                </div>
+                <div class="contact-item">
+                    <img src="icons/mail-white.svg" alt="Email">
+                    <span>geral@bukoonde.com</span>
+                </div>
+            </div>
+            <div class="social-media">
+                <a href="#" class="social-icon">
+                    <img src="icons/FacebookLogo-1.svg" alt="Facebook">
+                </a>
+                <a href="#" class="social-icon">
+                    <img src="icons/InstagramLogo-1.svg" alt="Instagram">
+                </a>
+                <a href="#" class="social-icon">
+                    <img src="icons/LinkedinLogo-1.svg" alt="LinkedIn">
+                </a>
+                <a href="#" class="social-icon">
+                    <img src="icons/XLogo-1.svg" alt="X">
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Header -->
+    <header class="main-header">
+        <div class="container header-content">
+            <a href="#" class="logo-container">
+                <div class="logo">
+                    <img src="images/Exclude.svg" alt="Bukoonde">
+                </div>
+                <div class="logo-text">Bukoonde</div>
+            </a>
+
+            <nav class="nav-menu">
+                <a href="#about" class="nav-link">Sobre</a>
+                <a href="#problem" class="nav-link">Problemática</a>
+                <a href="#benefits" class="nav-link">Benefícios</a>
+                <a href="#solutions" class="nav-link">Soluções</a>
+                <a href="#team" class="nav-link">Equipe</a>
+            </nav>
+
+            <div class="header-actions">
+                <button class="theme-toggle" id="themeToggle" aria-label="Alternar tema">
+                    <i class="fas fa-moon"></i>
+                </button>
+
+                <button class="cta-button" onclick="alertModalIncomplete()">
+                    Começar Agora
+                    <img src="icons/move-right.svg" alt="">
+                </button>
+            </div>
+
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="about">
+        <div class="container hero-content">
+            <h1 class="hero-title" data-aos="fade-up">Encontre a <mark>Escola Perfeita</mark> em Segundos</h1>
+            <p class="hero-description" data-aos="fade-up" data-aos-delay="100">
+                Conectamos estudantes angolanos às instituições de ensino ideais através de tecnologia inteligente,
+                orientação personalizada e informações centralizadas para transformar o futuro da educação em Angola.
+            </p>
+
+            <div class="hero-actions" data-aos="fade-up" data-aos-delay="200">
+                <button class="primary-btn" onclick="alertModalIncomplete()">
+                    Descobrir Escolas
+                    <img src="icons/move-right.svg" alt="">
+                </button>
+                <button class="secondary-btn" onclick="watchVideo()">
+                    <i class="fas fa-play-circle"></i>
+                    Ver Como Funciona
+                </button>
+            </div>
+
+            <div class="hero-stats" data-aos="fade-up" data-aos-delay="300">
+                <div class="stat-item">
+                    <img src="icons/timer.svg" alt="Tempo" class="stat-icon">
+                    <span class="stat-text">Tempo médio de busca: <mark>30s</mark></span>
+                </div>
+                <div class="stat-item">
+                    <img src="icons/map-pin.svg" alt="Localização" class="stat-icon">
+                    <span class="stat-text">Escolas Mapeadas: <mark>500+</mark></span>
+                </div>
+                <div class="stat-item">
+                    <img src="icons/gauge.svg" alt="Precisão" class="stat-icon">
+                    <span class="stat-text">Precisão das Sugestões: <mark>95%</mark></span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Problem Section -->
+    <section class="section problem" id="problem">
+        <div class="container">
+            <h2 class="section-title" data-aos="fade-up">Problemática</h2>
+            <p class="section-subtitle" data-aos="fade-up" data-aos-delay="100">
+                Encontrar a escola certa em Angola é <mark>complicado e desafiador</mark> para a maioria dos estudantes
+            </p>
+
+            <div class="problem-cards">
+                <div class="problem-card" data-aos="fade-up" data-aos-delay="200">
+                    <h3>Processo Demorado</h3>
+                    <p>
+                        Estudantes perdem semanas pesquisando escolas manualmente, visitando uma por uma
+                        sem garantia de encontrar a ideal para seu perfil académico e financeiro.
+                    </p>
+                </div>
+
+                <div class="problem-card" data-aos="fade-up" data-aos-delay="300">
+                    <h3>Escolhas Inadequadas</h3>
+                    <p>
+                        Falta de orientação vocacional personalizada leva a decisões erradas sobre cursos,
+                        resultando em insucesso académico, desistência e perda de tempo e recursos.
+                    </p>
+                </div>
+
+                <div class="problem-card" data-aos="fade-up" data-aos-delay="400">
+                    <h3>Informações Descentralizadas</h3>
+                    <p>
+                        Dados sobre escolas, cursos, processos de admissão e requisitos financeiros estão
+                        espalhados, dificultando comparações e tomada de decisões informadas.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Benefits Section -->
+    <section class="section benefits" id="benefits">
+        <div class="container">
+            <h2 class="section-title" data-aos="fade-up">Benefícios da Plataforma</h2>
+            <p class="section-subtitle" data-aos="fade-up" data-aos-delay="100">
+                Oferecemos a solução mais completa e confiável para encontrar a escola ideal em Angola
+            </p>
+
+            <div class="benefits-content">
+                <div class="benefits-list" data-aos="fade-right">
+                    <ul>
+                        <li>
+                            <div class="benefit-icon">
+                                <img src="icons/check.svg" alt="Check">
+                            </div>
+                            <span>Busca Inteligente em Segundos</span>
+                        </li>
+                        <li>
+                            <div class="benefit-icon">
+                                <img src="icons/check.svg" alt="Check">
+                            </div>
+                            <span>Sugestões Personalizadas e Confiáveis</span>
+                        </li>
+                        <li>
+                            <div class="benefit-icon">
+                                <img src="icons/check.svg" alt="Check">
+                            </div>
+                            <span>Orientação Vocacional por Especialistas</span>
+                        </li>
+                        <li>
+                            <div class="benefit-icon">
+                                <img src="icons/check.svg" alt="Check">
+                            </div>
+                            <span>Mapeamento Completo de Instituições</span>
+                        </li>
+                        <li>
+                            <div class="benefit-icon">
+                                <img src="icons/check.svg" alt="Check">
+                            </div>
+                            <span>Acesso a Informações Centralizadas</span>
+                        </li>
+                        <li>
+                            <div class="benefit-icon">
+                                <img src="icons/check.svg" alt="Check">
+                            </div>
+                            <span>Baixo Custo e Alta Eficiência</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="benefits-grid" data-aos="fade-left">
+                    <div class="benefit-card">
+                        <div class="benefit-card-icon">
+                            <img src="icons/search.svg" alt="Busca">
+                        </div>
+                        <h3>Busca em Segundos</h3>
+                        <p>
+                            Encontre escolas em questão de segundos com nosso algoritmo de busca otimizado
+                            para a realidade angolana.
+                        </p>
+                    </div>
+
+                    <div class="benefit-card">
+                        <div class="benefit-card-icon">
+                            <img src="icons/map-pin.svg" alt="Localização">
+                        </div>
+                        <h3>Mapeamento Completo</h3>
+                        <p>
+                            Visualize escolas próximas com localização precisa, informações detalhadas
+                            e rotas otimizadas.
+                        </p>
+                    </div>
+
+                    <div class="benefit-card">
+                        <div class="benefit-card-icon">
+                            <img src="icons/brain.svg" alt="Inteligência">
+                        </div>
+                        <h3>Sugestões Confiáveis</h3>
+                        <p>
+                            Receba recomendações personalizadas baseadas no seu perfil, habilidades
+                            e objetivos académicos.
+                        </p>
+                    </div>
+
+                    <div class="benefit-card">
+                        <div class="benefit-card-icon">
+                            <img src="icons/users.svg" alt="Usuários">
+                        </div>
+                        <h3>Orientação Personalizada</h3>
+                        <p>
+                            Acesso a sessões de orientação vocacional com profissionais qualificados
+                            para uma escolha assertiva.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Solutions Section -->
+    <section class="section solutions" id="solutions">
+        <div class="container">
+            <h2 class="section-title title-solutions" data-aos="fade-up">Nossas Soluções</h2>
+            <p class="section-subtitle" data-aos="fade-up" data-aos-delay="100">
+                Uma plataforma inteligente que conecta estudantes às escolas perfeitas com sugestões personalizadas
+            </p>
+
+            <div class="solutions-cards">
+                <div class="solution-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="solution-icon">
+                        <img src="icons/search.svg" alt="Busca">
+                    </div>
+                    <h3>Busca Instantânea</h3>
+                    <p>
+                        Sistema de busca avançado com múltiplos critérios (localização, curso, preço, avaliações)
+                        para encontrar a instituição ideal em segundos.
+                    </p>
+                </div>
+
+                <div class="solution-card" data-aos="fade-up" data-aos-delay="300">
+                    <div class="solution-icon">
+                        <img src="icons/brain.svg" alt="Inteligência">
+                    </div>
+                    <h3>Orientação Inteligente</h3>
+                    <p>
+                        Algoritmos inteligentes e orientação profissional personalizada para ajudar na escolha
+                        de cursos baseada no perfil do estudante.
+                    </p>
+                </div>
+
+                <div class="solution-card" data-aos="fade-up" data-aos-delay="400">
+                    <div class="solution-icon">
+                        <img src="icons/database.svg" alt="Dados">
+                    </div>
+                    <h3>Dados Centralizados</h3>
+                    <p>
+                        Plataforma unificada com todas as informações sobre instituições, cursos, processos
+                        de admissão e requisitos financeiros em um só lugar.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team Section -->
+    <section class="section team" id="team">
+        <div class="container">
+            <h2 class="section-title" data-aos="fade-up">Nossa Equipa</h2>
+            <p class="section-subtitle" data-aos="fade-up" data-aos-delay="100">
+                Conheça o talentoso time por trás da Bukoonde
+            </p>
+
+            <div class="team-cards">
+                <div class="team-card" data-aos="fade-up" data-aos-delay="200">
+                    <img src="images/eclesiastes.enc" alt="Eclesiaste Vaz" class="team-img">
+                    <h3>Eclesiaste Vaz</h3>
+                    <p class="team-role">CEO & Co-fundador</p>
+                    <p class="team-desc">
+                        Responsável pela visão estratégica, gestão de parcerias e governação da empresa.
+                        Focado em transformar o sector educacional através da tecnologia.
+                    </p>
+                </div>
+
+                <div class="team-card" data-aos="fade-up" data-aos-delay="300">
+                    <img src="images/image-fidel.jpeg" alt="Fidel Fernando" class="team-img">
+                    <h3>Fidel Fernando</h3>
+                    <p class="team-role">CTO & Co-fundador</p>
+                    <p class="team-desc">
+                        Líder da estratégia tecnológica, arquitetura de sistemas e desenvolvimento da plataforma.
+                        Garante escalabilidade, segurança e inovação técnica.
+                    </p>
+                </div>
+
+                <div class="team-card" data-aos="fade-up" data-aos-delay="400">
+                    <img src="images/bernanbé.enc" alt="Bernabé Manuel" class="team-img">
+                    <h3>Bernabé Manuel</h3>
+                    <p class="team-role">Desenvolvedor Web</p>
+                    <p class="team-desc">
+                        Especialista em desenvolvimento front-end e back-end, assegurando a construção de uma
+                        plataforma robusta, responsiva e centrada no utilizador.
+                    </p>
+                </div>
+
+                <div class="team-card" data-aos="fade-up" data-aos-delay="500">
+                    <img src="images/lucilio.jpeg" alt="Lucílio Evanilson" class="team-img">
+                    <h3>Lucílio Evanilson</h3>
+                    <p class="team-role">Especialista em Marketing</p>
+                    <p class="team-desc">
+                        Responsável pelas estratégias de aquisição e retenção de utilizadores, gestão de campanhas
+                        em redes sociais e crescimento orgânico da base de utilizadores.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Download Section -->
+    <section class="download">
+        <div class="download-content">
+            <div class="download-text" data-aos="fade-right">
+                <h2>Baixe o Aplicativo</h2>
+                <p>
+                    Tenha acesso a todas as funcionalidades da Bukoonde diretamente no seu dispositivo móvel.
+                    Encontre escolas, compare cursos e receba orientação personalizada onde estiver.
+                </p>
+
+                <div class="download-buttons">
+                    <a href="#" class="download-btn" onclick="alertModalIncomplete()">
+                        <img src="icons/apple.svg" alt="Apple Store">
+                        <div class="download-btn-text">
+                            <span>Disponível na</span>
+                            <span>App Store</span>
+                        </div>
+                    </a>
+
+                    <a href="#" class="download-btn" onclick="alertModalIncomplete()">
+                        <img src="icons/Google Play.svg" alt="Google Play">
+                        <div class="download-btn-text">
+                            <span>Disponível no</span>
+                            <span>Google Play</span>
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+            <div class="download-images" data-aos="fade-left">
+                <img src="/images/Group 24.png" alt="App Screen 1" class="download-img">
+                <img src="/images/image-login.png" alt="App Screen 2" class="download-img">
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container footer-content">
+            <div class="footer-about">
+                <div class="footer-logo">
+                    <div class="footer-logo-img">
+                        <img src="images/Exclude.svg" alt="Bukoonde">
+                    </div>
+                    <div class="footer-logo-text">Bukoonde</div>
+                </div>
+
+                <p class="footer-description">
+                    Conectando inovação à realidade angolana através de tecnologia que revoluciona como
+                    estudantes encontram escolas e escolhem cursos, transformando o futuro da educação em Angola.
+                </p>
+
+                <div class="footer-contact">
+                    <h3>Ligue para nós</h3>
+                    <p>+244 923 456 789</p>
+                </div>
+
+                <div class="footer-social">
+                    <a href="#">
+                        <img src="icons/FacebookLogo.svg" alt="Facebook">
+                    </a>
+                    <a href="#">
+                        <img src="icons/InstagramLogo.svg" alt="Instagram">
+                    </a>
+                    <a href="#">
+                        <img src="icons/LinkedinLogo.svg" alt="LinkedIn">
+                    </a>
+                    <a href="#">
+                        <img src="icons/XLogo.svg" alt="X">
+                    </a>
+                </div>
+            </div>
+
+            <div class="footer-links">
+                <h3 class="footer-heading">Sobre</h3>
+                <ul class="footer-links">
+                    <li><a href="#about">Sobre Nós</a></li>
+                    <li><a href="#problem">Problemática</a></li>
+                    <li><a href="#benefits">Benefícios</a></li>
+                    <li><a href="#solutions">Nossa Solução</a></li>
+                    <li><a href="#team">Nossa Equipa</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-links">
+                <h3 class="footer-heading">Serviços</h3>
+                <ul class="footer-links">
+                    <li><a href="#" onclick="alertModalIncomplete()">Busca de Escolas</a></li>
+                    <li><a href="#" onclick="alertModalIncomplete()">Mapeamento Educacional</a></li>
+                    <li><a href="#" onclick="alertModalIncomplete()">Orientações de Cursos</a></li>
+                    <li><a href="#" onclick="alertModalIncomplete()">Consultoria Personalizada</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-contact-info">
+                <h3 class="footer-heading">Contactos</h3>
+
+                <div class="footer-contact-item">
+                    <div class="footer-contact-icon">
+                        <img src="icons/mail.svg" alt="Email">
+                    </div>
+                    <div class="footer-contact-info">
+                        <span>Email</span>
+                        <span>geral@bukoonde.com</span>
+                    </div>
+                </div>
+
+                <div class="footer-contact-item">
+                    <div class="footer-contact-icon">
+                        <img src="icons/phone.svg" alt="Telefone">
+                    </div>
+                    <div class="footer-contact-info">
+                        <span>Telefone</span>
+                        <span>+244 923 456 789</span>
+                    </div>
+                </div>
+
+                <div class="footer-contact-item">
+                    <div class="footer-contact-icon">
+                        <img src="icons/map-pin-blue.svg" alt="Localização">
+                    </div>
+                    <div class="footer-contact-info">
+                        <span>Localização</span>
+                        <span>Luanda, Angola</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <div class="container">
+                <p>&copy; 2025 Bukoonde. Todos os direitos reservados.</p>
+                <div class="footer-bottom-links">
+                    <a href="#">Política de Privacidade</a>
+                    <a href="#">Termos de Uso</a>
+                    <a href="#">Suporte</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <a href="#" class="back-to-top" id="backToTop">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+
+    <!-- Modal de plataforma em desenvolvimento -->
     <div id="incompleteModal" class="modal">
         <div class="modal-content">
             <div class="modal-header">
                 <h2>Plataforma em Desenvolvimento</h2>
-                <button class="close-btn" onclick="closeModal('incompleteModal')">&times;</button>
+                <button class="modal-close" onclick="closeModal('incompleteModal')">&times;</button>
             </div>
             <div class="modal-body">
                 <p>Estamos trabalhando arduamente para trazer a você a melhor experiência possível. No momento, algumas
                     funcionalidades ainda estão em desenvolvimento.</p>
                 <p>Pedimos desculpas pelo inconveniente e agradecemos sua compreensão.</p>
                 <p>Quer ser notificado quando lançarmos oficialmente?</p>
-                <div style="margin-top: 20px;">
-                    <input type="email" placeholder="Seu melhor e-mail"
-                        style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 6px; margin-bottom: 10px;">
-                    <button class="modal-btn modal-btn-primary" style="width: 100%;">
-                        <span class="loading-spinner" style="display: none;"></span>
-                        Me avise quando estiver pronto
-                    </button>
-                </div>
+                <input type="email" class="modal-input" placeholder="Seu melhor e-mail" id="notificationEmail">
             </div>
             <div class="modal-footer">
-                <button class="modal-btn modal-btn-primary" onclick="closeModal('incompleteModal')">Entendi</button>
+                <button class="modal-btn modal-btn-secondary" onclick="closeModal('incompleteModal')">Mais
+                    tarde</button>
+                <button class="modal-btn modal-btn-primary" onclick="submitNotification()">
+                    <span class="loading-spinner" style="display: none;"></span>
+                    Me avise quando estiver pronto
+                </button>
             </div>
         </div>
     </div>
@@ -45,11 +541,10 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h2>Como a Bukoonde funciona</h2>
-                <button class="close-btn" onclick="closeModal('videoModal')">&times;</button>
+                <button class="modal-close" onclick="closeModal('videoModal')">&times;</button>
             </div>
             <div class="modal-body" style="padding: 0;">
                 <div class="video-container">
-                    <!-- Vídeo placeholder - substitua pelo seu vídeo real -->
                     <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ?rel=0" frameborder="0"
                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                         allowfullscreen></iframe>
@@ -61,411 +556,9 @@
         </div>
     </div>
 
-    <div class="head">
-        <div class="mail-phone">
-            <div class="phone">
-                <img src="/icons/mail-white.svg" alt="">
-                <span>+244 972 634 992</span>
-            </div>
-
-            <div class="email">
-                <img src="/icons/phone-white.svg" alt="">
-                <span>contato@bukoonde.com</span>
-            </div>
-        </div>
-
-        <div class="social-media">
-            <a href="#" class="social-icon">
-                <img src="/icons/FacebookLogo-1.svg" alt="">
-            </a>
-            <a href="#" class="social-icon">
-                <img src="/icons/InstagramLogo-1.svg" alt="">
-            </a>
-            <a href="#" class="social-icon">
-                <img src="/icons/LinkedinLogo-1.svg" alt="">
-            </a>
-
-            <a href="#" class="social-icon">
-                <img src="/icons/XLogo-1.svg" alt="">
-            </a>
-        </div>
-    </div>
-
-    <div id="about" class="container-hero">
-        <header class="header-main">
-            <div class="logo-text-company">
-                <div class="logo">
-                    <img src="/images/Exclude.svg" alt="">
-                </div>
-
-                <h2>Bukoonde</h2>
-            </div>
-
-            <div class="links">
-                <ul>
-                    <li><a href="#about">Sobre</a></li>
-                    <li><a href="#problem">Problemática</a></li>
-                    <li><a href="#benefits">Benefícios</a></li>
-                    <li><a href="#solucions">Nossas Soluções</a></li>
-                    <li><a href="#team">Equipe</a></li>
-
-                    <button onclick="alertModalIncomplete()" class="btn-started">Começar agora <img
-                            src="/icons/move-right.svg" alt=""></button>
-                </ul>
-            </div>
-        </header>
-
-        <div class="content-hero">
-            <h2>Encontre a <mark>Escola</mark> Perfeita em Segundos</h1>
-                <p>Conectando inovação à realidade angolana através de tecnologia que revoluciona como
-                    estudantes encontram escolas e escolhem cursos</p>
-
-                <div class="btn-actions">
-                    <button class="btn-started" onclick="alertModalIncomplete()">
-                        Descubrir escolas
-                        <img src="/icons/move-right-blue.svg" alt="">
-                    </button>
-
-                    <button class="btn-watch" onclick="watchVideo()">
-                        <img src="/icons/circle-play.svg" alt="">
-                        Ver como funciona
-                    </button>
-                </div>
-
-                <div class="info-mini">
-                    <div class="item">
-                        <img src="/icons/timer.svg" alt="">
-                        Tempo médio de busca: <mark>30s</mark>
-                    </div>
-
-                    <div class="item">
-                        <img src="/icons/map-pin.svg" alt="">
-                        Escolas Mapeadas: <mark>500+</mark>
-                    </div>
-
-                    <div class="item">
-                        <img src="/icons/gauge.svg" alt="">
-                        Precisão das Sugestões: <mark>95%</mark>
-                    </div>
-                </div>
-        </div>
-    </div>
-
-    <div id="problem" class="container-problem">
-        <h2>Problemática</h2>
-        <p>Encontrar a escola certa é <mark>Complicada</mark></p>
-
-        <div class="items">
-            <div class="item">
-                <h3>Processo Demorado</h3>
-                <span>Estudantes perdem semanas pesquisando
-                    escolas manualmente, visitando uma por
-                    uma sem garantia de encontrar a ideal.</span>
-            </div>
-
-            <div class="item">
-                <h3>Escolhas Inadequadas</h3>
-                <span>Falta de orientação personalizada leva a decisões erradas sobre cursos, desperdiçando tempo e
-                    recursos.</span>
-            </div>
-
-            <div class="item">
-                <h3>Informações Dispersas</h3>
-                <span>Dados sobre escolas estão espalhados, dificultando comparações e tomada de decisões
-                    informadas.</span>
-            </div>
-        </div>
-    </div>
-
-    <div id="benefits" class="container-benefits">
-        <div class="block-left">
-            <p class="title-header">Benefícios da plataforma</p>
-            <h2>Principais Benefícios da Bukoonde</h2>
-            <p class="description-container">Oferecemos a solução mais completa e confiável para encontrar a escola
-                ideal e orientar sua carreira educacional.</p>
-
-            <ul>
-                <li>
-                    <div class="icon-check">
-                        <img src="/icons/check.svg" alt="">
-                    </div>
-
-                    <span>Busca em Segundos</span>
-                </li>
-
-                <li>
-                    <div class="icon-check">
-                        <img src="/icons/check.svg" alt="">
-                    </div>
-                    <span>Sugestões Confiáveis</span>
-                </li>
-
-                <li>
-                    <div class="icon-check">
-                        <img src="/icons/check.svg" alt="">
-                    </div>
-                    <span>Para toda família</span>
-                </li>
-
-                <li>
-                    <div class="icon-check">
-                        <img src="/icons/check.svg" alt="">
-                    </div>
-
-                    <span>Mapeamento Completo</span>
-                </li>
-
-                <li>
-                    <div class="icon-check">
-                        <img src="/icons/check.svg" alt="">
-                    </div>
-                    <span>Orientação Personalizada</span>
-                </li>
-
-                <li>
-                    <div class="icon-check">
-                        <img src="/icons/check.svg" alt="">
-                    </div>
-                    <span>Baixo Custo</span>
-                </li>
-            </ul>
-        </div>
-
-        <div class="block-right">
-            <div class="card">
-                <div class="card-image">
-                    <img src="/icons/timer.svg" alt="">
-                </div>
-
-                <h3>Busca em Segundos</h3>
-
-                <p>Encontre escolas em questão de segundos com nosso algoritmo de busca otimizado para a realidade
-                    angolana.</p>
-            </div>
-
-            <div class="card">
-                <div class="card-image">
-                    <img src="/icons/map-pin.svg" alt="">
-                </div>
-
-                <h3>Mapeamento Completo</h3>
-
-                <p>Visualize escolas próximas com localização precisa, informações detalhadas e rotas otimizadas.</p>
-            </div>
-
-            <div class="card">
-                <div class="card-image">
-                    <img src="/icons/timer.svg" alt="">
-                </div>
-
-                <h3>Sugestões Confiáveis</h3>
-
-                <p>Encontre escolas em questão de segundos com nosso algoritmo de busca otimizado para a realidade
-                    angolana.</p>
-            </div>
-
-            <div class="card">
-                <div class="card-image">
-                    <img src="/icons/timer.svg" alt="">
-                </div>
-
-                <h3>Orientação Personalizada</h3>
-
-                <p>Encontre escolas em questão de segundos com nosso algoritmo de busca otimizado para a realidade
-                    angolana.</p>
-            </div>
-        </div>
-    </div>
-
-    <div id="solucions" class="container-solucions">
-        <h2>Nossas Soluções</h2>
-        <p>Uma plataforma inteligente que conecta estudantes às escolas perfeitas em questão de segundos, com sugestões
-            personalizadas e confiáveis.</p>
-
-        <div class="items">
-            <div class="item">
-                <img src="/icons/search.svg" alt="">
-                <h3>Busca Instantânia</h3>
-                <span>Encontre escolas em segundos com nosso sistema de busca avançado e mapeamento completo.</span>
-            </div>
-
-            <div class="line"></div>
-
-            <div class="item">
-                <img src="/icons/brain.svg" alt="">
-                <h3>Orientação Inteligente</h3>
-                <span>Sugestões personalizadas de cursos baseadas no perfil, habilidades e objetivos do
-                    estudante.</span>
-            </div>
-
-            <div class="line"></div>
-
-            <div class="item">
-                <img src="/icons/database.svg" alt="">
-                <h3>Dados Centralizados</h3>
-                <span>Todas as informações sobre escolas em um só lugar, facilitando comparações e decisões.</span>
-            </div>
-        </div>
-    </div>
-
-    <div id="team" class="container-team">
-        <h2>Nossa Equipa</h2>
-        <div class="line-blue"></div>
-
-        <div class="teams">
-            <div class="team">
-                <img src="/images/eclesiastes.enc" alt="">
-                <h3>Eclesiaste Vaz</h3>
-                <p>Co-fundador</p>
-                <span>Desenvolvedor Mobile e <br> Back-End, CEO.</span>
-            </div>
-
-            <div class="team">
-                <img src="/images/image-fidel.jpeg" alt="">
-                <h3>Fidel Fernando</h3>
-                <p>Co-fundador</p>
-                <span>Desenvolvedor Front-End, <br> UI/UX Designer, CTO</span>
-            </div>
-
-            <div class="team">
-                <img src="/images/bernanbé.enc" alt="">
-                <h3>Bernabé Manuel</h3>
-                <p>Co-fundador</p>
-                <span>Desenvolvedor Front-End, <br> COO, CMO</span>
-            </div>
-
-            <div class="team">
-                <img src="/images/lucilio.jpeg" alt="">
-                <h3>Lucílio Evanilsonl</h3>
-                <p>Social Media</p>
-                <span>Gestor de Produto</span>
-            </div>
-        </div>
-    </div>
-
-    <div class="container-download">
-        <div class="content-download">
-            <h2>Baixe o Aplicativo</h2>
-            <p>Novos recursos. Nova aparência, Sem riscos e <br> sem necessidade de cartão de crédito</p>
-
-            <div class="btn-action">
-                <div class="button">
-                    <img src="/icons/apple.svg" alt="">
-
-                    <span>Baixe na <br> <mark>Loja da Apple</mark></span>
-                </div>
-
-                <div class="button">
-                    <img src="/icons/Google Play.svg" alt="">
-
-                    <span>Baixe no <br> <mark>Google Play</mark></span>
-                </div>
-            </div>
-        </div>
-
-        <div class="app">
-            <div class="image2"></div>
-            <div class="image1"></div>
-        </div>
-    </div>
-
-    <footer>
-        <div class="footer-top">
-            <div class="part1">
-                <div class="logo-text-company">
-                    <div class="logo">
-                        <img src="/images/Exclude.svg" alt="">
-                    </div>
-
-                    <h2>Bukoonde</h2>
-                </div>
-
-                <h2 class="text-call">Ligue para nós</h2>
-                <p class="number">+244 972 634 992</p>
-                <span>Conectando inovação à realidade angolana através da educação e tecnologia que transforma
-                    vidas.</span>
-
-                <div class="block-media">
-                    <img src="/icons/FacebookLogo.svg" alt="">
-                    <img src="/icons/InstagramLogo.svg" alt="">
-                    <img src="/icons/LinkedinLogo.svg" alt="">
-                    <img src="/icons/XLogo.svg" alt="">
-                </div>
-            </div>
-
-            <div class="part2">
-                <h2>Sobre</h2>
-
-                <ul>
-                    <li>Sobre</li>
-
-                    <li>Problemática</li>
-
-                    <li>Benefícios</li>
-
-                    <li>Nossa Proposta</li>
-
-                    <li>Eqipe</li>
-                </ul>
-            </div>
-
-            <div class="part2">
-                <h2>Serviços</h2>
-
-                <ul>
-                    <li>Busca de escolas</li>
-
-                    <li>Mapeamento Educacional</li>
-
-                    <li>Orientação de Cursos</li>
-
-                    <li>Consultoria Personalida</li>
-                </ul>
-            </div>
-
-            <div class="part2">
-                <h2>contactos</h2>
-
-                <ul>
-                    <div class="item-contact">
-                        <div class="icon">
-                            <img src="/icons/mail.svg" alt="">
-                        </div>
-
-                        <p>Email <br> <mark>hello@bukoonde.ao</mark></p>
-                    </div>
-
-                    <div class="item-contact">
-                        <div class="icon">
-                            <img src="/icons/phone.svg" alt="">
-                        </div>
-
-                        <p>Telefone <br> <mark>+244 972 634 992</mark></p>
-                    </div>
-
-                    <div class="item-contact">
-                        <div class="icon">
-                            <img src="/icons/map-pin-blue.svg" alt="">
-                        </div>
-
-                        <p>Localização <br> <mark>Luanda, Angola</mark></p>
-                    </div>
-                </ul>
-            </div>
-        </div>
-
-        <div class="footer-bottom">
-            <p class="text-footer">
-                © 2025 Bukoonde. Todos os direitos reservados.
-            </p>
-
-            <div class="text-right">
-                <p>Politíca de Privacidade</p>
-                <p>Termos de Uso</p>
-                <p>Suporte</p>
-            </div>
-        </div>
-    </footer>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script src="/script/script.js"></script>
+    <script src="/script/theme.js"></script>
 </body>
 
 </html>
