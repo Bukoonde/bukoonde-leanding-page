@@ -1,564 +1,1980 @@
 <!DOCTYPE html>
-<html lang="pt-AO" data-theme="dark">
+<html lang="pt">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description"
-        content="Bukoonde - Conectando estudantes às melhores instituições de ensino em Angola através de tecnologia inteligente">
-    <meta name="keywords"
-        content="educação Angola, escolas Angola, cursos Angola, orientação vocacional, plataforma educacional">
-    <meta name="author" content="Bukoonde">
-    <meta property="og:title" content="Bukoonde - Encontre a Escola Perfeita em Angola">
-    <meta property="og:description"
-        content="Plataforma inovadora que conecta estudantes às instituições de ensino ideais em Angola">
-    <meta property="og:image" content="https://bukoonde.com/images/og-image.jpg">
-    <meta property="og:url" content="https://bukoonde.com">
-    <meta name="twitter:card" content="summary_large_image">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bukoonde — Educação que Conecta Angola</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,700;0,9..144,900;1,9..144,400&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet" />
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+  <style>
+    /* ═══════════════════════════════════════════════════════════════
+       DESIGN TOKENS
+    ═══════════════════════════════════════════════════════════════ */
+    :root {
+      --bg: #0a0a08;
+      --surface: #111110;
+      --surface2: #1a1a17;
+      --surface3: #222220;
+      --border: rgba(255,255,255,0.07);
+      --border-hover: rgba(255,255,255,0.14);
+      --primary: #3b82f6;
+      --primary-light: #60a5fa;
+      --primary-dim: rgba(59,130,246,0.15);
+      --primary-dim2: rgba(59,130,246,0.08);
+      --green: #4ade80;
+      --green-dim: rgba(74,222,128,0.12);
+      --text: #f0ede6;
+      --text-secondary: #c8c4bb;
+      --muted: #7a7870;
+      --muted2: #4a4845;
+      --radius: 16px;
+      --radius-sm: 8px;
+      --radius-lg: 24px;
+      --nav-h: 72px;
 
-    <title>Bukoonde - Conectando Estudantes às Melhores Escolas em Angola</title>
+      /* Fluid type scale */
+      --text-xs: clamp(0.68rem, 1.5vw, 0.75rem);
+      --text-sm: clamp(0.8rem, 1.8vw, 0.88rem);
+      --text-base: clamp(0.9rem, 2vw, 1rem);
+      --text-lg: clamp(1rem, 2.2vw, 1.125rem);
+      --text-xl: clamp(1.1rem, 2.5vw, 1.25rem);
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@300;400;500;600;700&display=swap"
-        rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
-    <link rel="shortcut icon" href="images/Exclude.svg" type="image/x-icon">
+      /* Fluid spacing */
+      --px: clamp(16px, 5vw, 60px);
+      --section-py: clamp(72px, 10vw, 120px);
+      --gap-md: clamp(16px, 3vw, 24px);
+      --gap-lg: clamp(24px, 5vw, 48px);
+    }
 
-    <link rel="stylesheet" href="/style/style.css">
-    <link rel="stylesheet" href="/style/dark-theme.css" id="theme-stylesheet">
+    /* ═══════════════════════════════════════════════════════════════
+       RESET & BASE
+    ═══════════════════════════════════════════════════════════════ */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'DM Sans', sans-serif;
+      font-size: var(--text-base);
+      line-height: 1.6;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+    img, svg { display: block; max-width: 100%; }
+    button { cursor: pointer; font-family: inherit; }
+    a { text-decoration: none; }
+
+    /* Noise overlay */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 9999;
+      opacity: 0.4;
+    }
+
+    /* ═══════════════════════════════════════════════════════════════
+       NAVIGATION
+    ═══════════════════════════════════════════════════════════════ */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 200;
+      height: var(--nav-h);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 var(--px);
+      transition: background 0.4s, backdrop-filter 0.4s, border-color 0.4s;
+      border-bottom: 1px solid transparent;
+    }
+    nav.scrolled {
+      background: rgba(10,10,8,0.88);
+      backdrop-filter: blur(24px) saturate(1.4);
+      -webkit-backdrop-filter: blur(24px) saturate(1.4);
+      border-bottom-color: var(--border);
+    }
+
+    .nav-logo {
+      font-family: 'Fraunces', sans-serif;
+      text-transform: uppercase;
+      font-size: clamp(1.3rem, 3vw, 1.6rem);
+      font-weight: 900;
+      color: var(--text);
+      letter-spacing: -0.02em;
+      flex-shrink: 0;
+    }
+    .nav-logo span { color: var(--primary); }
+
+    /* Desktop links */
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: clamp(20px, 3vw, 36px);
+      list-style: none;
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+    .nav-links a {
+      color: var(--muted);
+      font-size: var(--text-sm);
+      font-weight: 400;
+      transition: color 0.2s;
+      letter-spacing: 0.01em;
+      white-space: nowrap;
+    }
+    .nav-links a:hover { color: var(--text); }
+
+    .nav-right { display: flex; align-items: center; gap: 12px; }
+
+    .nav-cta {
+      background: var(--primary);
+      color: #0a0a08;
+      border: none;
+      padding: 10px 22px;
+      border-radius: 100px;
+      font-size: var(--text-sm);
+      font-weight: 500;
+      transition: background 0.2s, transform 0.15s;
+      white-space: nowrap;
+    }
+    .nav-cta:hover { background: var(--primary-light); transform: scale(1.03); }
+
+    /* Hamburger */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      background: none;
+      border: none;
+      padding: 8px;
+      border-radius: 8px;
+      transition: background 0.2s;
+      z-index: 201;
+    }
+    .hamburger:hover { background: var(--surface2); }
+    .hamburger span {
+      display: block;
+      width: 22px;
+      height: 2px;
+      background: var(--text);
+      border-radius: 2px;
+      transition: transform 0.3s, opacity 0.3s, width 0.3s;
+      transform-origin: center;
+    }
+    .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+    .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    /* Mobile drawer */
+    .nav-drawer {
+      position: fixed;
+      inset: 0;
+      background: var(--bg);
+      z-index: 199;
+      display: flex;
+      flex-direction: column;
+      padding: calc(var(--nav-h) + 24px) var(--px) 40px;
+      transform: translateX(100%);
+      transition: transform 0.38s cubic-bezier(0.4,0,0.2,1);
+      overflow-y: auto;
+    }
+    .nav-drawer.open { transform: translateX(0); }
+    .nav-drawer ul { list-style: none; display: flex; flex-direction: column; gap: 4px; flex: 1; }
+    .nav-drawer ul a {
+      display: block;
+      padding: 14px 0;
+      font-size: clamp(1.5rem, 6vw, 2rem);
+      font-family: 'Fraunces', serif;
+      font-weight: 700;
+      color: var(--text);
+      border-bottom: 1px solid var(--border);
+      transition: color 0.2s, padding-left 0.2s;
+    }
+    .nav-drawer ul a:hover { color: var(--primary); padding-left: 8px; }
+    .nav-drawer-footer { margin-top: 32px; display: flex; flex-direction: column; gap: 12px; }
+    .nav-drawer-footer .btn-primary { justify-content: center; font-size: 1rem; padding: 16px; }
+    .nav-drawer-footer .btn-ghost { justify-content: center; font-size: 1rem; padding: 16px; }
+
+    /* ═══════════════════════════════════════════════════════════════
+       HERO
+    ═══════════════════════════════════════════════════════════════ */
+    .hero {
+      min-height: 100svh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: calc(var(--nav-h) + clamp(40px,8vw,80px)) var(--px) clamp(60px,8vw,80px);
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::after {
+      content: '';
+      position: absolute;
+      width: clamp(400px,80vw,900px);
+      height: clamp(400px,80vw,900px);
+      background: radial-gradient(circle, rgba(37,99,235,0.12) 0%, transparent 70%);
+      top: 50%; left: 50%;
+      transform: translate(-50%,-55%);
+      pointer-events: none;
+    }
+
+    .blob {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(clamp(40px,8vw,80px));
+      opacity: 0.25;
+      animation: drift 12s ease-in-out infinite alternate;
+      pointer-events: none;
+    }
+    .blob-1 { width: clamp(200px,40vw,400px); height: clamp(200px,40vw,400px); background: var(--primary); top: -80px; right: -60px; animation-delay: 0s; }
+    .blob-2 { width: clamp(150px,30vw,300px); height: clamp(150px,30vw,300px); background: #2d6a4f; bottom: 0; left: -40px; animation-delay: -4s; }
+    .blob-3 { width: clamp(100px,20vw,200px); height: clamp(100px,20vw,200px); background: var(--primary-light); bottom: 80px; right: 15%; animation-delay: -8s; }
+
+    @keyframes drift {
+      from { transform: translate(0,0) scale(1); }
+      to   { transform: translate(20px,-20px) scale(1.1); }
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--primary-dim);
+      border: 1px solid rgba(37,99,235,0.3);
+      color: var(--primary-light);
+      font-size: var(--text-xs);
+      font-weight: 500;
+      padding: 6px 16px;
+      border-radius: 100px;
+      margin-bottom: clamp(20px,4vw,32px);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      opacity: 0;
+      animation: fadeUp 0.8s 0.2s forwards;
+    }
+
+    .hero-title {
+      font-family: 'Fraunces', serif;
+      font-size: clamp(2.8rem, 10vw, 7.5rem);
+      font-weight: 900;
+      line-height: 1.0;
+      letter-spacing: -0.03em;
+      max-width: min(900px, 90vw);
+      opacity: 0;
+      animation: fadeUp 0.9s 0.35s forwards;
+    }
+    .hero-title em { font-style: italic; font-weight: 300; color: var(--primary); }
+
+    .hero-sub {
+      max-width: min(520px, 85vw);
+      color: var(--muted);
+      font-size: clamp(0.95rem, 2.5vw, 1.1rem);
+      margin-top: clamp(16px,3vw,28px);
+      line-height: 1.7;
+      opacity: 0;
+      animation: fadeUp 0.9s 0.5s forwards;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: clamp(10px,2vw,16px);
+      margin-top: clamp(28px,5vw,44px);
+      align-items: center;
+      flex-wrap: wrap;
+      justify-content: center;
+      opacity: 0;
+      animation: fadeUp 0.9s 0.65s forwards;
+    }
+
+    /* Buttons */
+    .btn-primary {
+      background: var(--primary);
+      color: #0a0a08;
+      border: none;
+      padding: clamp(12px,2.5vw,16px) clamp(24px,4vw,36px);
+      border-radius: 100px;
+      font-size: clamp(0.88rem,2vw,0.95rem);
+      font-weight: 500;
+      transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      white-space: nowrap;
+    }
+    .btn-primary:hover { background: var(--primary-light); transform: translateY(-2px); box-shadow: 0 12px 40px rgba(37,99,235,0.35); }
+    .btn-primary:active { transform: translateY(0); }
+
+    .btn-ghost {
+      background: transparent;
+      color: var(--text);
+      border: 1px solid var(--border);
+      padding: clamp(12px,2.5vw,16px) clamp(20px,3.5vw,32px);
+      border-radius: 100px;
+      font-size: clamp(0.88rem,2vw,0.95rem);
+      font-weight: 400;
+      transition: border-color 0.2s, background 0.2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      white-space: nowrap;
+    }
+    .btn-ghost:hover { border-color: var(--border-hover); background: rgba(255,255,255,0.04); }
+
+    .hero-stats {
+      display: flex;
+      gap: clamp(20px,5vw,48px);
+      margin-top: clamp(40px,7vw,72px);
+      flex-wrap: wrap;
+      justify-content: center;
+      opacity: 0;
+      animation: fadeUp 0.9s 0.8s forwards;
+    }
+    .stat { text-align: center; }
+    .stat-number {
+      font-family: 'Fraunces', serif;
+      font-size: clamp(1.8rem, 5vw, 2.5rem);
+      font-weight: 700;
+      color: var(--text);
+      line-height: 1;
+      display: block;
+    }
+    .stat-label {
+      font-size: var(--text-xs);
+      color: var(--muted);
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      margin-top: 4px;
+    }
+
+    /* Stats dividers (desktop) */
+    .stat:not(:last-child) { position: relative; }
+    @media (min-width: 600px) {
+      .stat:not(:last-child)::after {
+        content: '';
+        position: absolute;
+        right: calc(-1 * clamp(10px,2.5vw,24px));
+        top: 20%;
+        height: 60%;
+        width: 1px;
+        background: var(--border);
+      }
+    }
+
+    .scroll-hint {
+      position: absolute;
+      bottom: clamp(20px,4vw,40px);
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      color: var(--muted2);
+      font-size: var(--text-xs);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      animation: fadeUp 1s 1.2s both;
+    }
+    .scroll-line {
+      width: 1px;
+      height: 36px;
+      background: linear-gradient(to bottom, var(--muted2), transparent);
+      animation: scrollPulse 2s ease-in-out infinite;
+    }
+    @keyframes scrollPulse {
+      0%,100% { opacity: 0.3; transform: scaleY(1); }
+      50% { opacity: 1; transform: scaleY(1.15); }
+    }
+
+    /* ═══════════════════════════════════════════════════════════════
+       MARQUEE
+    ═══════════════════════════════════════════════════════════════ */
+    .marquee-section {
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: 18px 0;
+      overflow: hidden;
+    }
+    .marquee-track {
+      display: flex;
+      gap: clamp(32px,5vw,60px);
+      animation: marquee 28s linear infinite;
+      width: max-content;
+    }
+    .marquee-track:hover { animation-play-state: paused; }
+    .marquee-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--muted2);
+      font-size: var(--text-sm);
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+    .marquee-item i { color: var(--primary); width: 13px; height: 13px; }
+    @keyframes marquee {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
+
+    /* ═══════════════════════════════════════════════════════════════
+       SECTIONS & LAYOUT
+    ═══════════════════════════════════════════════════════════════ */
+    section { padding: var(--section-py) var(--px); position: relative; }
+    .container { max-width: 1200px; margin: 0 auto; }
+
+    .section-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--primary);
+      font-size: var(--text-xs);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      font-weight: 500;
+      margin-bottom: 16px;
+    }
+    .section-label::before {
+      content: '';
+      display: block;
+      width: 20px;
+      height: 1px;
+      background: var(--primary);
+    }
+
+    .section-title {
+      font-family: 'Fraunces', serif;
+      font-size: clamp(1.9rem, 5vw, 3.8rem);
+      font-weight: 700;
+      line-height: 1.1;
+      letter-spacing: -0.025em;
+      max-width: 620px;
+    }
+    .section-title em { font-style: italic; font-weight: 300; color: var(--primary); }
+
+    /* ═══════════════════════════════════════════════════════════════
+       HOW IT WORKS
+    ═══════════════════════════════════════════════════════════════ */
+    .how-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: clamp(40px,6vw,80px);
+      align-items: start;
+      margin-top: clamp(40px,6vw,72px);
+    }
+
+    .steps-list { display: flex; flex-direction: column; }
+
+    .step {
+      display: flex;
+      gap: clamp(14px,2.5vw,24px);
+      padding: clamp(20px,3vw,32px) 0;
+      border-bottom: 1px solid var(--border);
+      cursor: pointer;
+      transition: all 0.25s;
+      position: relative;
+    }
+    .step:first-child { border-top: 1px solid var(--border); }
+
+    .step-bar {
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 2px;
+      background: var(--primary);
+      transform: scaleY(0);
+      transform-origin: top;
+      transition: transform 0.4s ease;
+    }
+    .step.active .step-bar { transform: scaleY(1); }
+
+    .step-num {
+      font-family: 'Fraunces', serif;
+      font-size: var(--text-sm);
+      font-weight: 700;
+      color: var(--muted2);
+      padding-top: 3px;
+      min-width: 28px;
+      transition: color 0.25s;
+    }
+    .step.active .step-num { color: var(--primary); }
+
+    .step-content h4 { font-size: clamp(0.9rem, 2vw, 1.05rem); font-weight: 500; margin-bottom: 6px; transition: color 0.25s; }
+    .step.active h4 { color: var(--primary-light); }
+    .step-content p { font-size: var(--text-sm); color: var(--muted); line-height: 1.6; }
+
+    /* Step visual (desktop sticky) */
+    .step-visual {
+      position: sticky;
+      top: calc(var(--nav-h) + 24px);
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      aspect-ratio: 4/5;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .visual-panel {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: clamp(16px,3vw,32px);
+      opacity: 0;
+      transform: translateY(12px);
+      transition: opacity 0.4s, transform 0.4s;
+      pointer-events: none;
+    }
+    .visual-panel.active { opacity: 1; transform: translateY(0); pointer-events: auto; }
+
+    /* Stepper dots (mobile) */
+    .step-dots {
+      display: none;
+      justify-content: center;
+      gap: 8px;
+      margin-top: 24px;
+    }
+    .step-dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: var(--muted2);
+      transition: background 0.25s, transform 0.25s;
+    }
+    .step-dot.active { background: var(--primary); transform: scale(1.3); }
+
+    /* ── Mock cards ── */
+    .mock-card {
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: clamp(14px,2.5vw,20px);
+      width: 100%;
+      max-width: 300px;
+    }
+    .mock-img {
+      width: 100%;
+      height: 90px;
+      background: linear-gradient(135deg, var(--primary-dim), rgba(46,107,79,0.2));
+      border-radius: var(--radius-sm);
+      margin-bottom: 12px;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .mock-tag {
+      font-size: 0.68rem;
+      background: var(--primary-dim);
+      color: var(--primary-light);
+      padding: 3px 10px;
+      border-radius: 100px;
+      display: inline-block;
+      margin-bottom: 8px;
+    }
+    .mock-title { font-size: 0.9rem; font-weight: 500; margin-bottom: 4px; }
+    .mock-sub { font-size: 0.75rem; color: var(--muted); }
+    .mock-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 12px;
+      padding-top: 12px;
+      border-top: 1px solid var(--border);
+    }
+    .mock-price { font-family: 'Fraunces', serif; font-size: 1rem; font-weight: 700; color: var(--primary); }
+    .mock-btn { background: var(--primary); color: #0a0a08; border: none; padding: 6px 12px; border-radius: 100px; font-size: 0.72rem; font-weight: 500; }
+
+    .event-header {
+      background: linear-gradient(135deg, rgba(74,222,128,0.15), var(--primary-dim));
+      border-radius: var(--radius-sm);
+      padding: 14px;
+      margin-bottom: 12px;
+      text-align: center;
+    }
+    .event-date { font-family: 'Fraunces', serif; font-size: 2.2rem; font-weight: 900; color: var(--primary-light); line-height: 1; }
+    .event-month { font-size: 0.72rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.1em; }
+    .event-info { display: flex; flex-direction: column; gap: 6px; }
+    .event-row { display: flex; align-items: center; gap: 8px; font-size: 0.78rem; color: var(--muted); }
+    .event-row i { color: var(--primary); width: 13px; height: 13px; }
+    .event-cap {
+      margin-top: 12px;
+      background: var(--green-dim);
+      border-radius: var(--radius-sm);
+      padding: 8px 12px;
+      display: flex; justify-content: space-between; align-items: center;
+      font-size: 0.75rem;
+    }
+    .cap-label { color: var(--muted); }
+    .cap-value { color: var(--green); font-weight: 500; }
+
+    .profile-header { display: flex; gap: 12px; align-items: center; margin-bottom: 14px; }
+    .profile-avatar {
+      width: 44px; height: 44px;
+      background: linear-gradient(135deg, var(--primary), var(--primary-light));
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Fraunces', serif;
+      font-weight: 900; color: #0a0a08; font-size: 1rem;
+      flex-shrink: 0;
+    }
+    .profile-name { font-weight: 500; font-size: 0.9rem; }
+    .profile-role { font-size: 0.72rem; color: var(--muted); }
+    .profile-chips { display: flex; flex-wrap: wrap; gap: 5px; margin-bottom: 12px; }
+    .chip { font-size: 0.68rem; border: 1px solid var(--border); padding: 3px 8px; border-radius: 100px; color: var(--muted); }
+    .enrolled-label { font-size: 0.68rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 6px; }
+    .enrolled-item { display: flex; align-items: center; gap: 8px; padding: 6px 0; border-bottom: 1px solid var(--border); font-size: 0.78rem; }
+    .enroll-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--primary); flex-shrink: 0; }
+    .enroll-dot.green { background: var(--green); }
+
+    /* ═══════════════════════════════════════════════════════════════
+       FEATURES
+    ═══════════════════════════════════════════════════════════════ */
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--gap-md);
+      margin-top: clamp(40px,6vw,72px);
+    }
+
+    .feature-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: clamp(24px,3vw,36px) clamp(20px,3vw,32px);
+      position: relative;
+      overflow: hidden;
+      transition: border-color 0.3s, transform 0.3s;
+    }
+    .feature-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 30% 20%, var(--primary-dim), transparent 60%);
+      opacity: 0;
+      transition: opacity 0.4s;
+    }
+    .feature-card:hover::before { opacity: 1; }
+    .feature-card:hover { border-color: var(--primary); box-shadow: 0 4px 20px rgba(37,99,235,0.15); transform: translateY(-4px); }
+
+    .feature-icon {
+      width: 44px; height: 44px;
+      background: var(--primary-dim);
+      border: 1px solid rgba(37,99,235,0.25);
+      border-radius: 11px;
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 20px;
+      color: var(--primary);
+    }
+    .feature-icon i { width: 20px; height: 20px; }
+    .feature-card h3 { font-size: clamp(0.95rem, 2vw, 1.1rem); font-weight: 500; margin-bottom: 10px; }
+    .feature-card p { font-size: var(--text-sm); color: var(--muted); line-height: 1.65; }
+    .feature-tag {
+      display: inline-block;
+      font-size: 0.62rem;
+      background: var(--primary);
+      color: #0a0a08;
+      padding: 2px 9px;
+      border-radius: 100px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 14px;
+    }
+
+    /* ═══════════════════════════════════════════════════════════════
+       USER TYPES
+    ═══════════════════════════════════════════════════════════════ */
+    .users-tabs {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 100px;
+      padding: 4px;
+      display: inline-flex;
+      margin-top: clamp(28px,5vw,48px);
+      flex-wrap: nowrap;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+      max-width: 100%;
+    }
+    .users-tabs::-webkit-scrollbar { display: none; }
+
+    .tab-btn {
+      padding: 10px clamp(14px,3vw,24px);
+      border-radius: 100px;
+      border: none;
+      background: transparent;
+      color: var(--muted);
+      font-size: var(--text-sm);
+      font-weight: 400;
+      cursor: pointer;
+      transition: all 0.25s;
+      white-space: nowrap;
+    }
+    .tab-btn.active { background: var(--primary); color: #0a0a08; font-weight: 500; }
+
+    .user-panel { display: none; }
+    .user-panel.active {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: clamp(32px,6vw,80px);
+      align-items: center;
+      margin-top: clamp(32px,5vw,56px);
+    }
+
+    .user-perks { list-style: none; display: flex; flex-direction: column; gap: clamp(10px,2vw,16px); margin-top: clamp(20px,3vw,32px); }
+    .perk { display: flex; align-items: flex-start; gap: 12px; font-size: var(--text-sm); }
+    .perk-icon {
+      width: 30px; height: 30px;
+      background: var(--green-dim);
+      border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0; margin-top: 2px;
+    }
+    .perk-icon i { width: 14px; height: 14px; color: var(--green); }
+    .perk strong { display: block; margin-bottom: 1px; font-weight: 500; }
+    .perk span { color: var(--muted); font-size: 0.82rem; }
+
+    .user-illustration {
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: clamp(20px,3vw,32px);
+      min-height: 300px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      justify-content: center;
+    }
+
+    /* ═══════════════════════════════════════════════════════════════
+       TESTIMONIALS
+    ═══════════════════════════════════════════════════════════════ */
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: clamp(14px,2vw,20px);
+      margin-top: clamp(40px,6vw,64px);
+      align-items: start;
+    }
+
+    .testimonial {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: clamp(20px,3vw,32px);
+      transition: border-color 0.3s;
+    }
+    .testimonial:hover { border-color: rgba(37,99,235,0.3); }
+    .testimonial:nth-child(2) { transform: translateY(-16px); }
+
+    .stars { display: flex; gap: 3px; margin-bottom: 18px; color: var(--primary); font-size: 13px; }
+
+    .testimonial blockquote {
+      font-size: clamp(0.88rem, 2vw, 0.95rem);
+      color: var(--text);
+      line-height: 1.7;
+      font-style: italic;
+      font-family: 'Fraunces', serif;
+      font-weight: 300;
+      margin-bottom: 20px;
+    }
+
+    .testimonial-author { display: flex; align-items: center; gap: 12px; }
+    .author-avatar {
+      width: 38px; height: 38px;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 700; font-size: 0.78rem; color: #0a0a08; flex-shrink: 0;
+    }
+    .author-name { font-size: var(--text-sm); font-weight: 500; }
+    .author-role { font-size: var(--text-xs); color: var(--muted); }
+
+    /* ═══════════════════════════════════════════════════════════════
+       TRUST BAR (new)
+    ═══════════════════════════════════════════════════════════════ */
+    .trust-bar {
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: clamp(28px,4vw,48px) var(--px);
+    }
+    .trust-bar-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: var(--gap-md);
+    }
+    .trust-item {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .trust-icon {
+      width: 44px; height: 44px;
+      background: var(--primary-dim);
+      border: 1px solid rgba(37,99,235,0.2);
+      border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+      color: var(--primary);
+    }
+    .trust-icon i { width: 20px; height: 20px; }
+    .trust-text strong { display: block; font-size: var(--text-sm); font-weight: 500; margin-bottom: 2px; }
+    .trust-text span { font-size: var(--text-xs); color: var(--muted); }
+
+    /* ═══════════════════════════════════════════════════════════════
+       FAQ (new)
+    ═══════════════════════════════════════════════════════════════ */
+    .faq-section { }
+    .faq-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: clamp(40px,6vw,80px);
+      align-items: start;
+      margin-top: clamp(40px,6vw,64px);
+    }
+    .faq-list { display: flex; flex-direction: column; }
+    .faq-item {
+      border-bottom: 1px solid var(--border);
+      overflow: hidden;
+    }
+    .faq-item:first-child { border-top: 1px solid var(--border); }
+    .faq-q {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 0;
+      cursor: pointer;
+      font-size: var(--text-base);
+      font-weight: 500;
+      gap: 16px;
+      user-select: none;
+    }
+    .faq-q:hover { color: var(--primary-light); }
+    .faq-icon {
+      width: 24px; height: 24px;
+      border-radius: 50%;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+      transition: background 0.25s, transform 0.3s;
+    }
+    .faq-icon i { width: 12px; height: 12px; color: var(--muted); }
+    .faq-item.open .faq-icon { background: var(--primary-dim); transform: rotate(45deg); }
+    .faq-item.open .faq-icon i { color: var(--primary); }
+    .faq-a {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s cubic-bezier(0.4,0,0.2,1);
+    }
+    .faq-a-inner { padding-bottom: 20px; color: var(--muted); font-size: var(--text-sm); line-height: 1.7; }
+    .faq-item.open .faq-a { max-height: 200px; }
+
+    .faq-visual {
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: clamp(24px,3vw,36px);
+      position: sticky;
+      top: calc(var(--nav-h) + 24px);
+    }
+    .faq-visual-title {
+      font-family: 'Fraunces', serif;
+      font-size: clamp(1.2rem, 2.5vw, 1.6rem);
+      font-weight: 700;
+      margin-bottom: 8px;
+      line-height: 1.2;
+    }
+    .faq-visual-title em { font-style: italic; font-weight: 300; color: var(--primary); }
+    .faq-visual-sub { font-size: var(--text-sm); color: var(--muted); margin-bottom: 24px; }
+    .faq-contact-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+    .faq-contact-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: var(--text-sm);
+    }
+    .faq-contact-icon {
+      width: 36px; height: 36px;
+      background: var(--primary-dim);
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+      color: var(--primary);
+    }
+    .faq-contact-icon i { width: 16px; height: 16px; }
+    .faq-contact-label { font-size: var(--text-xs); color: var(--muted); }
+
+    /* ═══════════════════════════════════════════════════════════════
+       CTA
+    ═══════════════════════════════════════════════════════════════ */
+    .cta-section {
+      text-align: center;
+      padding: var(--section-py) var(--px);
+      background: var(--surface);
+      position: relative;
+      overflow: hidden;
+    }
+    .cta-section::before {
+      content: '';
+      position: absolute;
+      width: 800px; height: 600px;
+      background: radial-gradient(ellipse, rgba(37,99,235,0.1) 0%, transparent 70%);
+      top: 50%; left: 50%;
+      transform: translate(-50%,-50%);
+      pointer-events: none;
+    }
+    .cta-title {
+      font-family: 'Fraunces', serif;
+      font-size: clamp(2.2rem, 7vw, 5rem);
+      font-weight: 900;
+      letter-spacing: -0.03em;
+      line-height: 1.05;
+      margin-bottom: 20px;
+    }
+    .cta-title em { font-style: italic; font-weight: 300; color: var(--primary); }
+    .cta-sub { color: var(--muted); max-width: min(480px, 90vw); margin: 0 auto 36px; line-height: 1.7; font-size: var(--text-base); }
+    .cta-actions { display: flex; gap: clamp(10px,2vw,16px); justify-content: center; flex-wrap: wrap; }
+
+    /* ═══════════════════════════════════════════════════════════════
+       FOOTER
+    ═══════════════════════════════════════════════════════════════ */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: clamp(48px,6vw,60px) var(--px) clamp(24px,4vw,40px);
+    }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: clamp(28px,4vw,48px);
+      margin-bottom: clamp(40px,5vw,60px);
+    }
+    .footer-brand p { font-size: var(--text-sm); color: var(--muted); margin-top: 10px; max-width: 240px; line-height: 1.65; }
+
+    /* Social links */
+    .footer-socials { display: flex; gap: 10px; margin-top: 20px; }
+    .social-btn {
+      width: 36px; height: 36px;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      background: transparent;
+      display: flex; align-items: center; justify-content: center;
+      color: var(--muted);
+      transition: border-color 0.2s, color 0.2s, background 0.2s;
+    }
+    .social-btn:hover { border-color: var(--primary); color: var(--primary); background: var(--primary-dim); }
+    .social-btn i { width: 15px; height: 15px; }
+
+    .footer-col h5 { font-size: var(--text-xs); text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted2); margin-bottom: 16px; }
+    .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+    .footer-col ul a { color: var(--muted); font-size: var(--text-sm); transition: color 0.2s; }
+    .footer-col ul a:hover { color: var(--text); }
+
+    .footer-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 28px;
+      border-top: 1px solid var(--border);
+      font-size: var(--text-xs);
+      color: var(--muted2);
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .angola-tag { display: flex; align-items: center; gap: 6px; }
+    .angola-flag { font-size: 1.1rem; }
+
+    /* ═══════════════════════════════════════════════════════════════
+       ANIMATIONS
+    ═══════════════════════════════════════════════════════════════ */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.7s, transform 0.7s; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+    .reveal-delay-4 { transition-delay: 0.4s; }
+
+    /* ═══════════════════════════════════════════════════════════════
+       BACK TO TOP
+    ═══════════════════════════════════════════════════════════════ */
+    .back-top {
+      position: fixed;
+      bottom: 28px;
+      right: 24px;
+      width: 44px; height: 44px;
+      background: var(--primary);
+      color: #0a0a08;
+      border: none;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer;
+      opacity: 0;
+      transform: translateY(16px);
+      transition: opacity 0.3s, transform 0.3s, background 0.2s;
+      z-index: 150;
+      box-shadow: 0 4px 24px rgba(37,99,235,0.4);
+    }
+    .back-top.visible { opacity: 1; transform: translateY(0); }
+    .back-top:hover { background: var(--primary-light); }
+    .back-top i { width: 18px; height: 18px; }
+
+    /* ═══════════════════════════════════════════════════════════════
+       RESPONSIVE — TABLET (≤1024px)
+    ═══════════════════════════════════════════════════════════════ */
+    @media (max-width: 1024px) {
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+      .nav-cta { display: none; }
+
+      .features-grid { grid-template-columns: repeat(2, 1fr); }
+      .trust-bar-inner { grid-template-columns: repeat(2, 1fr); }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+      .testimonials-grid { grid-template-columns: 1fr 1fr; }
+      .testimonial:nth-child(2) { transform: none; }
+      .testimonial:nth-child(3) { grid-column: 1 / -1; max-width: 480px; justify-self: center; }
+
+      .faq-grid { grid-template-columns: 1fr; }
+      .faq-visual { position: static; }
+    }
+
+    /* ═══════════════════════════════════════════════════════════════
+       RESPONSIVE — MOBILE (≤768px)
+    ═══════════════════════════════════════════════════════════════ */
+    @media (max-width: 768px) {
+      :root { --nav-h: 60px; }
+
+      .how-grid {
+        grid-template-columns: 1fr;
+        gap: 0;
+      }
+      .step-visual {
+        display: none; /* replaced by inline mobile visual */
+      }
+      .step-dots { display: flex; }
+
+      /* Mobile step visual inline */
+      .mobile-step-preview {
+        display: block;
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: var(--radius-lg);
+        overflow: hidden;
+        margin-top: 32px;
+        position: relative;
+        min-height: 280px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .features-grid { grid-template-columns: 1fr; }
+      .trust-bar-inner { grid-template-columns: 1fr; gap: 20px; }
+
+      .user-panel.active {
+        grid-template-columns: 1fr;
+        gap: 28px;
+      }
+
+      .testimonials-grid {
+        grid-template-columns: 1fr;
+        gap: 14px;
+      }
+      .testimonial:nth-child(3) { grid-column: auto; max-width: none; }
+
+      .footer-grid {
+        grid-template-columns: 1fr;
+        gap: 32px;
+      }
+      .footer-brand p { max-width: 100%; }
+
+      .hero-stats { gap: 20px; }
+
+      .cta-actions { flex-direction: column; align-items: center; }
+      .cta-actions .btn-primary,
+      .cta-actions .btn-ghost { width: 100%; max-width: 320px; justify-content: center; }
+
+      .scroll-hint { display: none; }
+    }
+
+    /* ═══════════════════════════════════════════════════════════════
+       RESPONSIVE — SMALL MOBILE (≤480px)
+    ═══════════════════════════════════════════════════════════════ */
+    @media (max-width: 480px) {
+      .hero-badge { font-size: 0.62rem; padding: 5px 12px; }
+      .hero-actions { flex-direction: column; width: 100%; }
+      .hero-actions .btn-primary,
+      .hero-actions .btn-ghost { width: 100%; max-width: 300px; justify-content: center; }
+
+      .users-tabs { width: 100%; }
+      .tab-btn { flex: 1; text-align: center; font-size: 0.8rem; padding: 10px 10px; }
+
+      .faq-q { font-size: 0.92rem; }
+    }
+
+    /* ═══════════════════════════════════════════════════════════════
+       TOUCH DEVICES — remove hover effects that feel glitchy
+    ═══════════════════════════════════════════════════════════════ */
+    @media (hover: none) {
+      .feature-card:hover { transform: none; }
+      .btn-primary:hover { transform: none; box-shadow: none; }
+      .feature-card:hover::before { opacity: 0; }
+    }
+
+    /* ═══════════════════════════════════════════════════════════════
+       REDUCED MOTION
+    ═══════════════════════════════════════════════════════════════ */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+      .blob { animation: none; }
+      .marquee-track { animation: none; }
+      .reveal { opacity: 1; transform: none; }
+      .hero-badge, .hero-title, .hero-sub, .hero-actions, .hero-stats { opacity: 1; animation: none; }
+    }
+  </style>
 </head>
 
 <body>
-    <!-- Top Bar -->
-    <div class="top-bar">
-        <div class="container top-bar-content">
-            <div class="contact-info">
-                <div class="contact-item">
-                    <img src="icons/phone-white.svg" alt="Telefone">
-                    <span>+244 923 456 789</span>
-                </div>
-                <div class="contact-item">
-                    <img src="icons/mail-white.svg" alt="Email">
-                    <span>geral@bukoonde.com</span>
-                </div>
-            </div>
-            <div class="social-media">
-                <a href="#" class="social-icon">
-                    <img src="icons/FacebookLogo-1.svg" alt="Facebook">
-                </a>
-                <a href="#" class="social-icon">
-                    <img src="icons/InstagramLogo-1.svg" alt="Instagram">
-                </a>
-                <a href="#" class="social-icon">
-                    <img src="icons/LinkedinLogo-1.svg" alt="LinkedIn">
-                </a>
-                <a href="#" class="social-icon">
-                    <img src="icons/XLogo-1.svg" alt="X">
-                </a>
-            </div>
-        </div>
+
+  <!-- NAV -->
+  <nav id="navbar">
+    <div class="nav-logo">buk<span>oo</span>nde</div>
+    <ul class="nav-links">
+      <li><a href="#como-funciona">Como funciona</a></li>
+      <li><a href="#funcionalidades">Funcionalidades</a></li>
+      <li><a href="#utilizadores">Para quem</a></li>
+      <li><a href="#depoimentos">Depoimentos</a></li>
+      <li><a href="#faq">FAQ</a></li>
+    </ul>
+    <div class="nav-right">
+      <button class="nav-cta">Entrar na plataforma</button>
+      <button class="hamburger" id="hamburger" aria-label="Menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- MOBILE DRAWER -->
+  <div class="nav-drawer" id="navDrawer" role="dialog" aria-modal="true" aria-label="Navegação">
+    <ul>
+      <li><a href="#como-funciona" class="drawer-link">Como funciona</a></li>
+      <li><a href="#funcionalidades" class="drawer-link">Funcionalidades</a></li>
+      <li><a href="#utilizadores" class="drawer-link">Para quem</a></li>
+      <li><a href="#depoimentos" class="drawer-link">Depoimentos</a></li>
+      <li><a href="#faq" class="drawer-link">FAQ</a></li>
+    </ul>
+    <div class="nav-drawer-footer">
+      <button class="btn-primary">Entrar na plataforma <i data-lucide="arrow-right" style="width:16px;height:16px;"></i></button>
+      <button class="btn-ghost">Sou uma instituição</button>
+    </div>
+  </div>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="blob blob-3"></div>
+
+    <div class="hero-badge">
+      <i data-lucide="map-pin" style="width:11px;height:11px;"></i>
+      Feito em Angola, para Angola
     </div>
 
-    <!-- Main Header -->
-    <header class="main-header">
-        <div class="container header-content">
-            <a href="#" class="logo-container">
-                <div class="logo">
-                    <img src="images/Exclude.svg" alt="Bukoonde">
-                </div>
-                <div class="logo-text">Bukoonde</div>
-            </a>
+    <h1 class="hero-title">
+      Educação que<br><em>conecta</em> pessoas
+    </h1>
 
-            <nav class="nav-menu">
-                <a href="#about" class="nav-link">Sobre</a>
-                <a href="#problem" class="nav-link">Problemática</a>
-                <a href="#benefits" class="nav-link">Benefícios</a>
-                <a href="#solutions" class="nav-link">Soluções</a>
-                <a href="#team" class="nav-link">Equipe</a>
-            </nav>
+    <p class="hero-sub">
+      Descobre cursos, explora eventos e conecta-te com as melhores instituições do país — tudo num só lugar.
+    </p>
 
-            <div class="header-actions">
-                <button class="theme-toggle" id="themeToggle" aria-label="Alternar tema">
-                    <i class="fas fa-moon"></i>
-                </button>
-
-                <button class="cta-button" onclick="alertModalIncomplete()">
-                    Começar Agora
-                    <img src="icons/move-right.svg" alt="">
-                </button>
-            </div>
-
-            <button class="mobile-menu-btn" id="mobileMenuBtn">
-                <i class="fas fa-bars"></i>
-            </button>
-        </div>
-    </header>
-
-    <!-- Hero Section -->
-    <section class="hero" id="about">
-        <div class="container hero-content">
-            <h1 class="hero-title" data-aos="fade-up">Encontre a <mark>Escola Perfeita</mark> em Segundos</h1>
-            <p class="hero-description" data-aos="fade-up" data-aos-delay="100">
-                Conectamos estudantes angolanos às instituições de ensino ideais através de tecnologia inteligente,
-                orientação personalizada e informações centralizadas para transformar o futuro da educação em Angola.
-            </p>
-
-            <div class="hero-actions" data-aos="fade-up" data-aos-delay="200">
-                <button class="primary-btn" onclick="alertModalIncomplete()">
-                    Descobrir Escolas
-                    <img src="icons/move-right.svg" alt="">
-                </button>
-                <button class="secondary-btn" onclick="watchVideo()">
-                    <i class="fas fa-play-circle"></i>
-                    Ver Como Funciona
-                </button>
-            </div>
-
-            <div class="hero-stats" data-aos="fade-up" data-aos-delay="300">
-                <div class="stat-item">
-                    <img src="icons/timer.svg" alt="Tempo" class="stat-icon">
-                    <span class="stat-text">Tempo médio de busca: <mark>30s</mark></span>
-                </div>
-                <div class="stat-item">
-                    <img src="icons/map-pin.svg" alt="Localização" class="stat-icon">
-                    <span class="stat-text">Escolas Mapeadas: <mark>500+</mark></span>
-                </div>
-                <div class="stat-item">
-                    <img src="icons/gauge.svg" alt="Precisão" class="stat-icon">
-                    <span class="stat-text">Precisão das Sugestões: <mark>95%</mark></span>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Problem Section -->
-    <section class="section problem" id="problem">
-        <div class="container">
-            <h2 class="section-title" data-aos="fade-up">Problemática</h2>
-            <p class="section-subtitle" data-aos="fade-up" data-aos-delay="100">
-                Encontrar a escola certa em Angola é <mark>complicado e desafiador</mark> para a maioria dos estudantes
-            </p>
-
-            <div class="problem-cards">
-                <div class="problem-card" data-aos="fade-up" data-aos-delay="200">
-                    <h3>Processo Demorado</h3>
-                    <p>
-                        Estudantes perdem semanas pesquisando escolas manualmente, visitando uma por uma
-                        sem garantia de encontrar a ideal para seu perfil académico e financeiro.
-                    </p>
-                </div>
-
-                <div class="problem-card" data-aos="fade-up" data-aos-delay="300">
-                    <h3>Escolhas Inadequadas</h3>
-                    <p>
-                        Falta de orientação vocacional personalizada leva a decisões erradas sobre cursos,
-                        resultando em insucesso académico, desistência e perda de tempo e recursos.
-                    </p>
-                </div>
-
-                <div class="problem-card" data-aos="fade-up" data-aos-delay="400">
-                    <h3>Informações Descentralizadas</h3>
-                    <p>
-                        Dados sobre escolas, cursos, processos de admissão e requisitos financeiros estão
-                        espalhados, dificultando comparações e tomada de decisões informadas.
-                    </p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Benefits Section -->
-    <section class="section benefits" id="benefits">
-        <div class="container">
-            <h2 class="section-title" data-aos="fade-up">Benefícios da Plataforma</h2>
-            <p class="section-subtitle" data-aos="fade-up" data-aos-delay="100">
-                Oferecemos a solução mais completa e confiável para encontrar a escola ideal em Angola
-            </p>
-
-            <div class="benefits-content">
-                <div class="benefits-list" data-aos="fade-right">
-                    <ul>
-                        <li>
-                            <div class="benefit-icon">
-                                <img src="icons/check.svg" alt="Check">
-                            </div>
-                            <span>Busca Inteligente em Segundos</span>
-                        </li>
-                        <li>
-                            <div class="benefit-icon">
-                                <img src="icons/check.svg" alt="Check">
-                            </div>
-                            <span>Sugestões Personalizadas e Confiáveis</span>
-                        </li>
-                        <li>
-                            <div class="benefit-icon">
-                                <img src="icons/check.svg" alt="Check">
-                            </div>
-                            <span>Orientação Vocacional por Especialistas</span>
-                        </li>
-                        <li>
-                            <div class="benefit-icon">
-                                <img src="icons/check.svg" alt="Check">
-                            </div>
-                            <span>Mapeamento Completo de Instituições</span>
-                        </li>
-                        <li>
-                            <div class="benefit-icon">
-                                <img src="icons/check.svg" alt="Check">
-                            </div>
-                            <span>Acesso a Informações Centralizadas</span>
-                        </li>
-                        <li>
-                            <div class="benefit-icon">
-                                <img src="icons/check.svg" alt="Check">
-                            </div>
-                            <span>Baixo Custo e Alta Eficiência</span>
-                        </li>
-                    </ul>
-                </div>
-
-                <div class="benefits-grid" data-aos="fade-left">
-                    <div class="benefit-card">
-                        <div class="benefit-card-icon">
-                            <img src="icons/search.svg" alt="Busca">
-                        </div>
-                        <h3>Busca em Segundos</h3>
-                        <p>
-                            Encontre escolas em questão de segundos com nosso algoritmo de busca otimizado
-                            para a realidade angolana.
-                        </p>
-                    </div>
-
-                    <div class="benefit-card">
-                        <div class="benefit-card-icon">
-                            <img src="icons/map-pin.svg" alt="Localização">
-                        </div>
-                        <h3>Mapeamento Completo</h3>
-                        <p>
-                            Visualize escolas próximas com localização precisa, informações detalhadas
-                            e rotas otimizadas.
-                        </p>
-                    </div>
-
-                    <div class="benefit-card">
-                        <div class="benefit-card-icon">
-                            <img src="icons/brain.svg" alt="Inteligência">
-                        </div>
-                        <h3>Sugestões Confiáveis</h3>
-                        <p>
-                            Receba recomendações personalizadas baseadas no seu perfil, habilidades
-                            e objetivos académicos.
-                        </p>
-                    </div>
-
-                    <div class="benefit-card">
-                        <div class="benefit-card-icon">
-                            <img src="icons/users.svg" alt="Usuários">
-                        </div>
-                        <h3>Orientação Personalizada</h3>
-                        <p>
-                            Acesso a sessões de orientação vocacional com profissionais qualificados
-                            para uma escolha assertiva.
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Solutions Section -->
-    <section class="section solutions" id="solutions">
-        <div class="container">
-            <h2 class="section-title title-solutions" data-aos="fade-up">Nossas Soluções</h2>
-            <p class="section-subtitle" data-aos="fade-up" data-aos-delay="100">
-                Uma plataforma inteligente que conecta estudantes às escolas perfeitas com sugestões personalizadas
-            </p>
-
-            <div class="solutions-cards">
-                <div class="solution-card" data-aos="fade-up" data-aos-delay="200">
-                    <div class="solution-icon">
-                        <img src="icons/search.svg" alt="Busca">
-                    </div>
-                    <h3>Busca Instantânea</h3>
-                    <p>
-                        Sistema de busca avançado com múltiplos critérios (localização, curso, preço, avaliações)
-                        para encontrar a instituição ideal em segundos.
-                    </p>
-                </div>
-
-                <div class="solution-card" data-aos="fade-up" data-aos-delay="300">
-                    <div class="solution-icon">
-                        <img src="icons/brain.svg" alt="Inteligência">
-                    </div>
-                    <h3>Orientação Inteligente</h3>
-                    <p>
-                        Algoritmos inteligentes e orientação profissional personalizada para ajudar na escolha
-                        de cursos baseada no perfil do estudante.
-                    </p>
-                </div>
-
-                <div class="solution-card" data-aos="fade-up" data-aos-delay="400">
-                    <div class="solution-icon">
-                        <img src="icons/database.svg" alt="Dados">
-                    </div>
-                    <h3>Dados Centralizados</h3>
-                    <p>
-                        Plataforma unificada com todas as informações sobre instituições, cursos, processos
-                        de admissão e requisitos financeiros em um só lugar.
-                    </p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Team Section -->
-    <section class="section team" id="team">
-        <div class="container">
-            <h2 class="section-title" data-aos="fade-up">Nossa Equipa</h2>
-            <p class="section-subtitle" data-aos="fade-up" data-aos-delay="100">
-                Conheça o talentoso time por trás da Bukoonde
-            </p>
-
-            <div class="team-cards">
-                <div class="team-card" data-aos="fade-up" data-aos-delay="200">
-                    <img src="images/eclesiastes.enc" alt="Eclesiaste Vaz" class="team-img">
-                    <h3>Eclesiaste Vaz</h3>
-                    <p class="team-role">CEO & Co-fundador</p>
-                    <p class="team-desc">
-                        Responsável pela visão estratégica, gestão de parcerias e governação da empresa.
-                        Focado em transformar o sector educacional através da tecnologia.
-                    </p>
-                </div>
-
-                <div class="team-card" data-aos="fade-up" data-aos-delay="300">
-                    <img src="images/image-fidel.jpeg" alt="Fidel Fernando" class="team-img">
-                    <h3>Fidel Fernando</h3>
-                    <p class="team-role">CTO & Co-fundador</p>
-                    <p class="team-desc">
-                        Líder da estratégia tecnológica, arquitetura de sistemas e desenvolvimento da plataforma.
-                        Garante escalabilidade, segurança e inovação técnica.
-                    </p>
-                </div>
-
-                <div class="team-card" data-aos="fade-up" data-aos-delay="400">
-                    <img src="images/bernanbé.enc" alt="Bernabé Manuel" class="team-img">
-                    <h3>Bernabé Manuel</h3>
-                    <p class="team-role">Desenvolvedor Web</p>
-                    <p class="team-desc">
-                        Especialista em desenvolvimento front-end e back-end, assegurando a construção de uma
-                        plataforma robusta, responsiva e centrada no utilizador.
-                    </p>
-                </div>
-
-                <div class="team-card" data-aos="fade-up" data-aos-delay="500">
-                    <img src="images/lucilio.jpeg" alt="Lucílio Evanilson" class="team-img">
-                    <h3>Lucílio Evanilson</h3>
-                    <p class="team-role">Especialista em Marketing</p>
-                    <p class="team-desc">
-                        Responsável pelas estratégias de aquisição e retenção de utilizadores, gestão de campanhas
-                        em redes sociais e crescimento orgânico da base de utilizadores.
-                    </p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Download Section -->
-    <section class="download">
-        <div class="download-content">
-            <div class="download-text" data-aos="fade-right">
-                <h2>Baixe o Aplicativo</h2>
-                <p>
-                    Tenha acesso a todas as funcionalidades da Bukoonde diretamente no seu dispositivo móvel.
-                    Encontre escolas, compare cursos e receba orientação personalizada onde estiver.
-                </p>
-
-                <div class="download-buttons">
-                    <a href="#" class="download-btn" onclick="alertModalIncomplete()">
-                        <img src="icons/apple.svg" alt="Apple Store">
-                        <div class="download-btn-text">
-                            <span>Disponível na</span>
-                            <span>App Store</span>
-                        </div>
-                    </a>
-
-                    <a href="#" class="download-btn" onclick="alertModalIncomplete()">
-                        <img src="icons/Google Play.svg" alt="Google Play">
-                        <div class="download-btn-text">
-                            <span>Disponível no</span>
-                            <span>Google Play</span>
-                        </div>
-                    </a>
-                </div>
-            </div>
-
-            <div class="download-images" data-aos="fade-left">
-                <img src="/images/Group 24.png" alt="App Screen 1" class="download-img">
-                <img src="/images/image-login.png" alt="App Screen 2" class="download-img">
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container footer-content">
-            <div class="footer-about">
-                <div class="footer-logo">
-                    <div class="footer-logo-img">
-                        <img src="images/Exclude.svg" alt="Bukoonde">
-                    </div>
-                    <div class="footer-logo-text">Bukoonde</div>
-                </div>
-
-                <p class="footer-description">
-                    Conectando inovação à realidade angolana através de tecnologia que revoluciona como
-                    estudantes encontram escolas e escolhem cursos, transformando o futuro da educação em Angola.
-                </p>
-
-                <div class="footer-contact">
-                    <h3>Ligue para nós</h3>
-                    <p>+244 923 456 789</p>
-                </div>
-
-                <div class="footer-social">
-                    <a href="#">
-                        <img src="icons/FacebookLogo.svg" alt="Facebook">
-                    </a>
-                    <a href="#">
-                        <img src="icons/InstagramLogo.svg" alt="Instagram">
-                    </a>
-                    <a href="#">
-                        <img src="icons/LinkedinLogo.svg" alt="LinkedIn">
-                    </a>
-                    <a href="#">
-                        <img src="icons/XLogo.svg" alt="X">
-                    </a>
-                </div>
-            </div>
-
-            <div class="footer-links">
-                <h3 class="footer-heading">Sobre</h3>
-                <ul class="footer-links">
-                    <li><a href="#about">Sobre Nós</a></li>
-                    <li><a href="#problem">Problemática</a></li>
-                    <li><a href="#benefits">Benefícios</a></li>
-                    <li><a href="#solutions">Nossa Solução</a></li>
-                    <li><a href="#team">Nossa Equipa</a></li>
-                </ul>
-            </div>
-
-            <div class="footer-links">
-                <h3 class="footer-heading">Serviços</h3>
-                <ul class="footer-links">
-                    <li><a href="#" onclick="alertModalIncomplete()">Busca de Escolas</a></li>
-                    <li><a href="#" onclick="alertModalIncomplete()">Mapeamento Educacional</a></li>
-                    <li><a href="#" onclick="alertModalIncomplete()">Orientações de Cursos</a></li>
-                    <li><a href="#" onclick="alertModalIncomplete()">Consultoria Personalizada</a></li>
-                </ul>
-            </div>
-
-            <div class="footer-contact-info">
-                <h3 class="footer-heading">Contactos</h3>
-
-                <div class="footer-contact-item">
-                    <div class="footer-contact-icon">
-                        <img src="icons/mail.svg" alt="Email">
-                    </div>
-                    <div class="footer-contact-info">
-                        <span>Email</span>
-                        <span>geral@bukoonde.com</span>
-                    </div>
-                </div>
-
-                <div class="footer-contact-item">
-                    <div class="footer-contact-icon">
-                        <img src="icons/phone.svg" alt="Telefone">
-                    </div>
-                    <div class="footer-contact-info">
-                        <span>Telefone</span>
-                        <span>+244 923 456 789</span>
-                    </div>
-                </div>
-
-                <div class="footer-contact-item">
-                    <div class="footer-contact-icon">
-                        <img src="icons/map-pin-blue.svg" alt="Localização">
-                    </div>
-                    <div class="footer-contact-info">
-                        <span>Localização</span>
-                        <span>Luanda, Angola</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="footer-bottom">
-            <div class="container">
-                <p>&copy; 2025 Bukoonde. Todos os direitos reservados.</p>
-                <div class="footer-bottom-links">
-                    <a href="#">Política de Privacidade</a>
-                    <a href="#">Termos de Uso</a>
-                    <a href="#">Suporte</a>
-                </div>
-            </div>
-        </div>
-    </footer>
-
-    <!-- Back to Top Button -->
-    <a href="#" class="back-to-top" id="backToTop">
-        <i class="fas fa-arrow-up"></i>
-    </a>
-
-    <!-- Modal de plataforma em desenvolvimento -->
-    <div id="incompleteModal" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2>Plataforma em Desenvolvimento</h2>
-                <button class="modal-close" onclick="closeModal('incompleteModal')">&times;</button>
-            </div>
-            <div class="modal-body">
-                <p>Estamos trabalhando arduamente para trazer a você a melhor experiência possível. No momento, algumas
-                    funcionalidades ainda estão em desenvolvimento.</p>
-                <p>Pedimos desculpas pelo inconveniente e agradecemos sua compreensão.</p>
-                <p>Quer ser notificado quando lançarmos oficialmente?</p>
-                <input type="email" class="modal-input" placeholder="Seu melhor e-mail" id="notificationEmail">
-            </div>
-            <div class="modal-footer">
-                <button class="modal-btn modal-btn-secondary" onclick="closeModal('incompleteModal')">Mais
-                    tarde</button>
-                <button class="modal-btn modal-btn-primary" onclick="submitNotification()">
-                    <span class="loading-spinner" style="display: none;"></span>
-                    Me avise quando estiver pronto
-                </button>
-            </div>
-        </div>
+    <div class="hero-actions">
+      <button class="btn-primary">
+        Explorar cursos
+        <i data-lucide="arrow-right" style="width:16px;height:16px;"></i>
+      </button>
+      <button class="btn-ghost">
+        <i data-lucide="play-circle" style="width:16px;height:16px;"></i>
+        Ver como funciona
+      </button>
     </div>
 
-    <!-- Modal de vídeo -->
-    <div id="videoModal" class="modal video-modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2>Como a Bukoonde funciona</h2>
-                <button class="modal-close" onclick="closeModal('videoModal')">&times;</button>
-            </div>
-            <div class="modal-body" style="padding: 0;">
-                <div class="video-container">
-                    <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ?rel=0" frameborder="0"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                        allowfullscreen></iframe>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button class="modal-btn modal-btn-primary" onclick="closeModal('videoModal')">Fechar</button>
-            </div>
-        </div>
+    <div class="hero-stats">
+      <div class="stat">
+        <span class="stat-number"><span class="count-up" data-target="1200">0</span>+</span>
+        <span class="stat-label">Cursos disponíveis</span>
+      </div>
+      <div class="stat">
+        <span class="stat-number"><span class="count-up" data-target="340">0</span>+</span>
+        <span class="stat-label">Eventos realizados</span>
+      </div>
+      <div class="stat">
+        <span class="stat-number"><span class="count-up" data-target="85">0</span>+</span>
+        <span class="stat-label">Instituições</span>
+      </div>
+      <div class="stat">
+        <span class="stat-number"><span class="count-up" data-target="18">0</span>K+</span>
+        <span class="stat-label">Estudantes activos</span>
+      </div>
     </div>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
-    <script src="/script/script.js"></script>
-    <script src="/script/theme.js"></script>
+    <div class="scroll-hint">
+      <div class="scroll-line"></div>
+      Explorar
+    </div>
+  </section>
+
+  <!-- MARQUEE -->
+  <div class="marquee-section" aria-hidden="true">
+    <div class="marquee-track" id="marqueeTrack">
+      <span class="marquee-item"><i data-lucide="star"></i> Cursos Online & Presenciais</span>
+      <span class="marquee-item"><i data-lucide="calendar"></i> Workshops & Bootcamps</span>
+      <span class="marquee-item"><i data-lucide="building-2"></i> Instituições Verificadas</span>
+      <span class="marquee-item"><i data-lucide="users"></i> Comunidade Activa</span>
+      <span class="marquee-item"><i data-lucide="zap"></i> Inscrição em Segundos</span>
+      <span class="marquee-item"><i data-lucide="award"></i> Avaliações Reais</span>
+      <span class="marquee-item"><i data-lucide="map-pin"></i> Apenas em Luanda</span>
+      <span class="marquee-item"><i data-lucide="trending-up"></i> Crescimento de Carreira</span>
+      <span class="marquee-item"><i data-lucide="star"></i> Cursos Online & Presenciais</span>
+      <span class="marquee-item"><i data-lucide="calendar"></i> Workshops & Bootcamps</span>
+      <span class="marquee-item"><i data-lucide="building-2"></i> Instituições Verificadas</span>
+      <span class="marquee-item"><i data-lucide="users"></i> Comunidade Activa</span>
+      <span class="marquee-item"><i data-lucide="zap"></i> Inscrição em Segundos</span>
+      <span class="marquee-item"><i data-lucide="award"></i> Avaliações Reais</span>
+      <span class="marquee-item"><i data-lucide="map-pin"></i> Apenas em Luanda</span>
+      <span class="marquee-item"><i data-lucide="trending-up"></i> Crescimento de Carreira</span>
+    </div>
+  </div>
+
+  <!-- HOW IT WORKS -->
+  <section id="como-funciona">
+    <div class="container">
+      <div class="reveal">
+        <div class="section-label">Como funciona</div>
+        <h2 class="section-title">Do interesse à<br><em>inscrição</em> em minutos</h2>
+      </div>
+
+      <div class="how-grid">
+        <!-- Steps -->
+        <div class="steps-list" id="stepsList">
+          <div class="step active" data-step="0">
+            <div class="step-bar"></div>
+            <div class="step-num">01</div>
+            <div class="step-content">
+              <h4>Descobre o que procuras</h4>
+              <p>Pesquisa por nome, área ou localização. Filtra por preço, modalidade e categoria para encontrar o curso ou evento ideal.</p>
+            </div>
+          </div>
+          <div class="step" data-step="1">
+            <div class="step-bar"></div>
+            <div class="step-num">02</div>
+            <div class="step-content">
+              <h4>Explora eventos únicos</h4>
+              <p>Workshops, palestras e bootcamps criados por escolas, grupos e professores independentes. Uma comunidade viva e crescente.</p>
+            </div>
+          </div>
+          <div class="step" data-step="2">
+            <div class="step-bar"></div>
+            <div class="step-num">03</div>
+            <div class="step-content">
+              <h4>Inscreve-te com um clique</h4>
+              <p>Sistema reserva a tua vaga automaticamente e envia confirmação. O evento aparece no teu perfil de imediato.</p>
+            </div>
+          </div>
+          <div class="step" data-step="3">
+            <div class="step-bar"></div>
+            <div class="step-num">04</div>
+            <div class="step-content">
+              <h4>Acompanha tudo no teu perfil</h4>
+              <p>Cursos inscritos, eventos próximos, favoritos guardados e avaliações — o teu percurso educativo num só lugar.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Desktop visual -->
+        <div class="step-visual">
+          <div class="visual-panel active" id="panel-0">
+            <div class="mock-card">
+              <div class="mock-img"><i data-lucide="code-2" style="width:28px;height:28px;color:var(--primary);"></i></div>
+              <div class="mock-tag">Programação</div>
+              <div class="mock-title">Desenvolvimento Web Completo</div>
+              <div class="mock-sub">Instituto ITEL · Luanda · 6 meses</div>
+              <div style="display:flex;gap:5px;margin-top:8px;flex-wrap:wrap;">
+                <span style="font-size:0.65rem;color:var(--muted);border:1px solid var(--border);padding:2px 7px;border-radius:100px;">HTML/CSS</span>
+                <span style="font-size:0.65rem;color:var(--muted);border:1px solid var(--border);padding:2px 7px;border-radius:100px;">JavaScript</span>
+                <span style="font-size:0.65rem;color:var(--muted);border:1px solid var(--border);padding:2px 7px;border-radius:100px;">React</span>
+              </div>
+              <div class="mock-row">
+                <div class="mock-price">15.000 Kz</div>
+                <button class="mock-btn">Inscrever</button>
+              </div>
+            </div>
+          </div>
+          <div class="visual-panel" id="panel-1">
+            <div class="mock-card">
+              <div class="event-header">
+                <div class="event-date">14</div>
+                <div class="event-month">Abril 2025</div>
+              </div>
+              <div class="mock-tag" style="background:var(--green-dim);color:var(--green);">Workshop</div>
+              <div class="mock-title">Design Thinking para Startups</div>
+              <div class="event-info" style="margin-top:8px;">
+                <div class="event-row"><i data-lucide="map-pin"></i>Luanda · Presencial</div>
+                <div class="event-row"><i data-lucide="clock"></i>09:00 — 17:00</div>
+                <div class="event-row"><i data-lucide="user"></i>Startup Hub AO</div>
+              </div>
+              <div class="event-cap">
+                <span class="cap-label">Vagas restantes</span>
+                <span class="cap-value">12 / 40</span>
+              </div>
+            </div>
+          </div>
+          <div class="visual-panel" id="panel-2">
+            <div class="mock-card" style="text-align:center;">
+              <div style="width:56px;height:56px;background:var(--green-dim);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 16px;">
+                <i data-lucide="check-circle" style="width:28px;height:28px;color:var(--green);"></i>
+              </div>
+              <div style="font-family:'Fraunces',serif;font-size:1.2rem;font-weight:700;margin-bottom:6px;">Inscrição confirmada!</div>
+              <div style="font-size:0.78rem;color:var(--muted);margin-bottom:20px;">A tua vaga foi reservada com sucesso.</div>
+              <div style="background:var(--surface2);border:1px solid var(--border);border-radius:10px;padding:14px;text-align:left;">
+                <div style="font-size:0.68rem;color:var(--muted);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:8px;">Detalhes</div>
+                <div style="font-size:0.8rem;margin-bottom:5px;">📅 14 de Abril · 09:00</div>
+                <div style="font-size:0.8rem;margin-bottom:5px;">📍 Luanda · Presencial</div>
+                <div style="font-size:0.8rem;">🎫 Ref: <span style="color:var(--primary);">BK-2025-0847</span></div>
+              </div>
+            </div>
+          </div>
+          <div class="visual-panel" id="panel-3">
+            <div class="mock-card">
+              <div class="profile-header">
+                <div class="profile-avatar">AM</div>
+                <div><div class="profile-name">Ana Mbuze</div><div class="profile-role">Estudante · Luanda</div></div>
+              </div>
+              <div class="profile-chips">
+                <span class="chip">Programação</span>
+                <span class="chip">Design</span>
+                <span class="chip">Negócios</span>
+              </div>
+              <div class="enrolled-label">Inscrições activas</div>
+              <div class="enrolled-item"><div class="enroll-dot"></div>Desenvolvimento Web Completo</div>
+              <div class="enrolled-item"><div class="enroll-dot green"></div>Workshop Design Thinking</div>
+              <div class="enrolled-item"><div class="enroll-dot"></div>Marketing Digital — Módulo 2</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Mobile visual (shown below steps on mobile) -->
+      <div class="mobile-step-preview" id="mobilePreview" style="display:none;"></div>
+      <div class="step-dots" id="stepDots">
+        <div class="step-dot active"></div>
+        <div class="step-dot"></div>
+        <div class="step-dot"></div>
+        <div class="step-dot"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TRUST BAR -->
+  <div class="trust-bar">
+    <div class="trust-bar-inner">
+      <div class="trust-item reveal">
+        <div class="trust-icon"><i data-lucide="shield-check"></i></div>
+        <div class="trust-text">
+          <strong>Instituições verificadas</strong>
+          <span>Todas validadas pela equipa Bukoonde</span>
+        </div>
+      </div>
+      <div class="trust-item reveal reveal-delay-1">
+        <div class="trust-icon"><i data-lucide="lock"></i></div>
+        <div class="trust-text">
+          <strong>Dados protegidos</strong>
+          <span>Encriptação de ponta-a-ponta</span>
+        </div>
+      </div>
+      <div class="trust-item reveal reveal-delay-2">
+        <div class="trust-icon"><i data-lucide="headphones"></i></div>
+        <div class="trust-text">
+          <strong>Suporte dedicado</strong>
+          <span>Resposta em menos de 24 horas</span>
+        </div>
+      </div>
+      <div class="trust-item reveal reveal-delay-3">
+        <div class="trust-icon"><i data-lucide="refresh-cw"></i></div>
+        <div class="trust-text">
+          <strong>Reembolso garantido</strong>
+          <span>7 dias sem perguntas</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FEATURES -->
+  <section id="funcionalidades" style="background:var(--surface);">
+    <div class="container">
+      <div class="reveal">
+        <div class="section-label">Funcionalidades</div>
+        <h2 class="section-title">Tudo o que precisas<br>para <em>crescer</em></h2>
+      </div>
+
+      <div class="features-grid">
+        <div class="feature-card reveal reveal-delay-1">
+          <div class="feature-icon"><i data-lucide="search"></i></div>
+          <h3>Pesquisa Inteligente</h3>
+          <p>Filtra por localização, preço, modalidade e categoria. Encontra exactamente o que procuras em segundos.</p>
+        </div>
+        <div class="feature-card reveal reveal-delay-2">
+          <div class="feature-tag">🔥 Diferencial</div>
+          <div class="feature-icon"><i data-lucide="calendar-days"></i></div>
+          <h3>Eventos Independentes</h3>
+          <p>Não só escolas — grupos, professores e organizações podem criar eventos. Uma comunidade viva e em crescimento orgânico.</p>
+        </div>
+        <div class="feature-card reveal reveal-delay-3">
+          <div class="feature-icon"><i data-lucide="heart"></i></div>
+          <h3>Favoritos & Comparação</h3>
+          <p>Guarda cursos e eventos para decidir depois. Compara opções sem perder o fio à meada.</p>
+        </div>
+        <div class="feature-card reveal reveal-delay-1">
+          <div class="feature-icon"><i data-lucide="bell"></i></div>
+          <h3>Notificações em Tempo Real</h3>
+          <p>Confirmações de inscrição, novos eventos na tua área e cursos recomendados — tudo notificado na hora.</p>
+        </div>
+        <div class="feature-card reveal reveal-delay-2">
+          <div class="feature-icon"><i data-lucide="bar-chart-3"></i></div>
+          <h3>Dashboard para Instituições</h3>
+          <p>Gerir cursos, eventos, inscrições e estatísticas de conversão num painel limpo e intuitivo.</p>
+        </div>
+        <div class="feature-card reveal reveal-delay-3">
+          <div class="feature-icon"><i data-lucide="star"></i></div>
+          <h3>Avaliações Verificadas</h3>
+          <p>Só quem participou pode avaliar. Ratings reais que ajudam outros estudantes a decidir melhor.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- USER TYPES -->
+  <section id="utilizadores">
+    <div class="container">
+      <div class="reveal">
+        <div class="section-label">Para quem é</div>
+        <h2 class="section-title">Uma plataforma,<br><em>três mundos</em></h2>
+      </div>
+
+      <div class="users-tabs reveal" role="tablist">
+        <button class="tab-btn active" data-tab="student" role="tab" aria-selected="true">Estudante</button>
+        <button class="tab-btn" data-tab="institution" role="tab" aria-selected="false">Instituição</button>
+        <button class="tab-btn" data-tab="admin" role="tab" aria-selected="false">Administrador</button>
+      </div>
+
+      <!-- STUDENT -->
+      <div class="user-panel active" id="tab-student" role="tabpanel">
+        <div>
+          <h3 style="font-family:'Fraunces',serif;font-size:clamp(1.6rem,4vw,2rem);font-weight:700;line-height:1.2;margin-bottom:10px;">
+            O teu próximo<br><em style="font-style:italic;font-weight:300;color:var(--primary);">passo começa aqui</em>
+          </h3>
+          <p style="color:var(--muted);font-size:var(--text-sm);margin-bottom:6px;">Descobre oportunidades de aprendizagem à tua medida, em qualquer parte de Angola.</p>
+          <ul class="user-perks">
+            <li class="perk"><div class="perk-icon"><i data-lucide="search"></i></div><div><strong>Pesquisa e filtra</strong><span>Cursos por área, preço e localização</span></div></li>
+            <li class="perk"><div class="perk-icon"><i data-lucide="calendar"></i></div><div><strong>Inscreve-te em eventos</strong><span>Workshops, palestras e bootcamps</span></div></li>
+            <li class="perk"><div class="perk-icon"><i data-lucide="heart"></i></div><div><strong>Guarda favoritos</strong><span>Compara e decide no teu tempo</span></div></li>
+            <li class="perk"><div class="perk-icon"><i data-lucide="star"></i></div><div><strong>Avalia e contribui</strong><span>Ajuda a comunidade a crescer</span></div></li>
+          </ul>
+        </div>
+        <div class="user-illustration">
+          <div style="font-size:var(--text-xs);color:var(--muted2);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:14px;">Recomendado para si</div>
+          <div style="background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:14px;display:flex;align-items:center;gap:12px;margin-bottom:8px;">
+            <div style="width:38px;height:38px;background:var(--primary-dim);border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0;"><i data-lucide="code-2" style="width:16px;height:16px;color:var(--primary);"></i></div>
+            <div><div style="font-size:var(--text-sm);font-weight:500;">React & TypeScript</div><div style="font-size:var(--text-xs);color:var(--muted);">IPCAS · 8.000 Kz</div></div>
+            <div style="margin-left:auto;"><i data-lucide="heart" style="width:15px;height:15px;color:var(--muted2);"></i></div>
+          </div>
+          <div style="background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:14px;display:flex;align-items:center;gap:12px;margin-bottom:8px;">
+            <div style="width:38px;height:38px;background:var(--green-dim);border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0;"><i data-lucide="trending-up" style="width:16px;height:16px;color:var(--green);"></i></div>
+            <div><div style="font-size:var(--text-sm);font-weight:500;">Marketing Digital</div><div style="font-size:var(--text-xs);color:var(--muted);">StartHub AO · Gratuito</div></div>
+            <div style="margin-left:auto;"><i data-lucide="heart" style="width:15px;height:15px;color:var(--muted2);"></i></div>
+          </div>
+          <div style="background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:14px;display:flex;align-items:center;gap:12px;">
+            <div style="width:38px;height:38px;background:rgba(139,92,246,0.15);border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0;"><i data-lucide="palette" style="width:16px;height:16px;color:#a78bfa;"></i></div>
+            <div><div style="font-size:var(--text-sm);font-weight:500;">UI/UX Design Foundations</div><div style="font-size:var(--text-xs);color:var(--muted);">DesignAO · 5.000 Kz</div></div>
+            <div style="margin-left:auto;"><i data-lucide="heart" style="width:15px;height:15px;color:var(--muted2);"></i></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- INSTITUTION -->
+      <div class="user-panel" id="tab-institution" role="tabpanel">
+        <div>
+          <h3 style="font-family:'Fraunces',serif;font-size:clamp(1.6rem,4vw,2rem);font-weight:700;line-height:1.2;margin-bottom:10px;">
+            A tua escola,<br><em style="font-style:italic;font-weight:300;color:var(--primary);">mais visível</em>
+          </h3>
+          <p style="color:var(--muted);font-size:var(--text-sm);margin-bottom:6px;">Publica cursos, cria eventos e gere inscrições com uma ferramenta pensada para instituições angolanas.</p>
+          <ul class="user-perks">
+            <li class="perk"><div class="perk-icon"><i data-lucide="plus-circle"></i></div><div><strong>Publica cursos facilmente</strong><span>Dashboard simples e intuitivo</span></div></li>
+            <li class="perk"><div class="perk-icon"><i data-lucide="calendar-plus"></i></div><div><strong>Cria eventos próprios</strong><span>Workshops, palestras, bootcamps</span></div></li>
+            <li class="perk"><div class="perk-icon"><i data-lucide="users"></i></div><div><strong>Gere inscrições</strong><span>Recebe notificações e confirma vagas</span></div></li>
+            <li class="perk"><div class="perk-icon"><i data-lucide="bar-chart-2"></i></div><div><strong>Analisa métricas</strong><span>Visualizações, conversão e inscrições</span></div></li>
+          </ul>
+        </div>
+        <div class="user-illustration">
+          <div style="font-size:var(--text-xs);color:var(--muted2);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:14px;">Dashboard — Resumo</div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px;">
+            <div style="background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:12px;">
+              <div style="font-family:'Fraunces',serif;font-size:1.7rem;font-weight:700;color:var(--primary);">47</div>
+              <div style="font-size:var(--text-xs);color:var(--muted);">Inscrições este mês</div>
+            </div>
+            <div style="background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:12px;">
+              <div style="font-family:'Fraunces',serif;font-size:1.7rem;font-weight:700;color:var(--green);">12</div>
+              <div style="font-size:var(--text-xs);color:var(--muted);">Cursos activos</div>
+            </div>
+          </div>
+          <div style="background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:12px;">
+            <div style="font-size:var(--text-xs);color:var(--muted2);margin-bottom:8px;text-transform:uppercase;letter-spacing:0.08em;">Próximos eventos</div>
+            <div style="display:flex;justify-content:space-between;align-items:center;padding:5px 0;border-bottom:1px solid var(--border);font-size:var(--text-sm);">
+              <span>Workshop de Python</span><span style="color:var(--primary);">8 vagas</span>
+            </div>
+            <div style="display:flex;justify-content:space-between;align-items:center;padding:5px 0;font-size:var(--text-sm);">
+              <span>Palestra de Empreend.</span><span style="color:var(--green);">23 vagas</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ADMIN -->
+      <div class="user-panel" id="tab-admin" role="tabpanel">
+        <div>
+          <h3 style="font-family:'Fraunces',serif;font-size:clamp(1.6rem,4vw,2rem);font-weight:700;line-height:1.2;margin-bottom:10px;">
+            Controlo total<br><em style="font-style:italic;font-weight:300;color:var(--primary);">da plataforma</em>
+          </h3>
+          <p style="color:var(--muted);font-size:var(--text-sm);margin-bottom:6px;">Garante a qualidade e confiança do ecossistema Bukoonde com ferramentas de moderação avançadas.</p>
+          <ul class="user-perks">
+            <li class="perk"><div class="perk-icon"><i data-lucide="shield-check"></i></div><div><strong>Aprova instituições</strong><span>Valida credenciais e perfis</span></div></li>
+            <li class="perk"><div class="perk-icon"><i data-lucide="eye"></i></div><div><strong>Modera conteúdo</strong><span>Remove publicações inadequadas</span></div></li>
+            <li class="perk"><div class="perk-icon"><i data-lucide="activity"></i></div><div><strong>Métricas globais</strong><span>Inscrições, cursos populares, eventos</span></div></li>
+            <li class="perk"><div class="perk-icon"><i data-lucide="user-x"></i></div><div><strong>Gere utilizadores</strong><span>Bloqueio e controlo de acesso</span></div></li>
+          </ul>
+        </div>
+        <div class="user-illustration">
+          <div style="font-size:var(--text-xs);color:var(--muted2);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:14px;">Moderação — Pendentes</div>
+          <div style="display:flex;flex-direction:column;gap:8px;">
+            <div style="background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:12px;display:flex;justify-content:space-between;align-items:center;gap:10px;">
+              <div>
+                <div style="font-size:var(--text-sm);font-weight:500;">Instituto Técnico Luanda</div>
+                <div style="font-size:var(--text-xs);color:var(--muted);">Nova instituição</div>
+              </div>
+              <div style="display:flex;gap:5px;flex-shrink:0;">
+                <button style="background:var(--green-dim);color:var(--green);border:none;padding:5px 9px;border-radius:6px;font-size:var(--text-xs);cursor:pointer;">Aprovar</button>
+                <button style="background:rgba(239,68,68,0.1);color:#f87171;border:none;padding:5px 9px;border-radius:6px;font-size:var(--text-xs);cursor:pointer;">Rejeitar</button>
+              </div>
+            </div>
+            <div style="background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:12px;display:flex;justify-content:space-between;align-items:center;gap:10px;">
+              <div>
+                <div style="font-size:var(--text-sm);font-weight:500;">Curso de Electrónica</div>
+                <div style="font-size:var(--text-xs);color:var(--muted);">Publicação pendente</div>
+              </div>
+              <div style="display:flex;gap:5px;flex-shrink:0;">
+                <button style="background:var(--green-dim);color:var(--green);border:none;padding:5px 9px;border-radius:6px;font-size:var(--text-xs);cursor:pointer;">Aprovar</button>
+                <button style="background:rgba(239,68,68,0.1);color:#f87171;border:none;padding:5px 9px;border-radius:6px;font-size:var(--text-xs);cursor:pointer;">Rejeitar</button>
+              </div>
+            </div>
+            <div style="background:var(--primary-dim);border:1px solid rgba(59,130,246,0.25);border-radius:10px;padding:10px;text-align:center;font-size:var(--text-xs);color:var(--primary);">
+              ⚠️ 3 itens aguardam aprovação
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section id="depoimentos" style="background:var(--surface);">
+    <div class="container">
+      <div class="reveal" style="text-align:center;">
+        <div class="section-label" style="justify-content:center;">Depoimentos</div>
+        <h2 class="section-title" style="max-width:100%;text-align:center;">O que dizem sobre<br>o <em>Bukoonde</em></h2>
+      </div>
+      <div class="testimonials-grid">
+        <div class="testimonial reveal reveal-delay-1">
+          <div class="stars">★★★★★</div>
+          <blockquote>"Encontrei o curso de programação que precisava em menos de 5 minutos. A plataforma é intuitiva e a inscrição é super rápida."</blockquote>
+          <div class="testimonial-author">
+            <div class="author-avatar" style="background:linear-gradient(135deg,var(--primary),var(--primary-light));">KD</div>
+            <div><div class="author-name">Kalundwe Dias</div><div class="author-role">Estudante de Informática · Luanda</div></div>
+          </div>
+        </div>
+        <div class="testimonial reveal reveal-delay-2">
+          <div class="stars">★★★★★</div>
+          <blockquote>"Como instituição, o dashboard é perfeito. Gerimos as inscrições dos nossos workshops sem dor de cabeça. Recomendamos a todos."</blockquote>
+          <div class="testimonial-author">
+            <div class="author-avatar" style="background:linear-gradient(135deg,#2d6a4f,#4ade80);">LM</div>
+            <div><div class="author-name">Lourdes Melo</div><div class="author-role">Directora · Instituto ITEL</div></div>
+          </div>
+        </div>
+        <div class="testimonial reveal reveal-delay-3">
+          <div class="stars">★★★★★</div>
+          <blockquote>"Consegui criar um evento como professor independente. A plataforma permitiu-me chegar a estudantes que nunca teriam sabido da minha palestra."</blockquote>
+          <div class="testimonial-author">
+            <div class="author-avatar" style="background:linear-gradient(135deg,#7c3aed,#a78bfa);">JN</div>
+            <div><div class="author-name">João Neto</div><div class="author-role">Professor & Speaker · Luanda</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq">
+    <div class="container">
+      <div class="reveal">
+        <div class="section-label">FAQ</div>
+        <h2 class="section-title">Perguntas<br><em>frequentes</em></h2>
+      </div>
+      <div class="faq-grid">
+        <div class="faq-list reveal">
+          <div class="faq-item">
+            <div class="faq-q">
+              <span>A plataforma é gratuita para estudantes?</span>
+              <div class="faq-icon"><i data-lucide="plus"></i></div>
+            </div>
+            <div class="faq-a"><div class="faq-a-inner">Sim! Criar conta e explorar todos os cursos e eventos é completamente gratuito. Só pagas quando decides inscrever-te num curso pago.</div></div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-q">
+              <span>Como funciona o processo de inscrição?</span>
+              <div class="faq-icon"><i data-lucide="plus"></i></div>
+            </div>
+            <div class="faq-a"><div class="faq-a-inner">Clica em "Inscrever" no curso ou evento que escolheste. O sistema reserva a tua vaga automaticamente e recebes uma confirmação com todos os detalhes no teu perfil.</div></div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-q">
+              <span>Posso criar eventos como professor independente?</span>
+              <div class="faq-icon"><i data-lucide="plus"></i></div>
+            </div>
+            <div class="faq-a"><div class="faq-a-inner">Sim! Qualquer pessoa ou organização pode criar e publicar eventos. Após validação pela equipa Bukoonde, o teu evento fica visível para toda a comunidade.</div></div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-q">
+              <span>A Bukoonde está disponível em todo o país?</span>
+              <div class="faq-icon"><i data-lucide="plus"></i></div>
+            </div>
+            <div class="faq-a"><div class="faq-a-inner">Actualmente focamo-nos em Luanda, mas estamos a expandir para outras províncias em 2025. Podes seguir os nossos canais para saber quando chegamos à tua cidade.</div></div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-q">
+              <span>Como posso registar a minha instituição?</span>
+              <div class="faq-icon"><i data-lucide="plus"></i></div>
+            </div>
+            <div class="faq-a"><div class="faq-a-inner">Envia uma candidatura através do formulário na nossa página de instituições. A equipa Bukoonde valida as credenciais e activa o teu dashboard em até 48 horas.</div></div>
+          </div>
+        </div>
+        <div class="faq-visual reveal reveal-delay-2">
+          <div class="faq-visual-title">Ainda tens<br><em>dúvidas?</em></div>
+          <div class="faq-visual-sub">A nossa equipa responde em menos de 24 horas.</div>
+          <div class="faq-contact-card">
+            <div class="faq-contact-row">
+              <div class="faq-contact-icon"><i data-lucide="mail"></i></div>
+              <div><div style="font-size:var(--text-sm);font-weight:500;">Email</div><div class="faq-contact-label">eclesiastevaz884@gmail.com</div></div>
+            </div>
+            <div style="height:1px;background:var(--border);"></div>
+            <div class="faq-contact-row">
+              <div class="faq-contact-icon"><i data-lucide="message-circle"></i></div>
+              <div><div style="font-size:var(--text-sm);font-weight:500;">WhatsApp</div><div class="faq-contact-label">+244 939 164 990</div></div>
+            </div>
+            <div style="height:1px;background:var(--border);"></div>
+            <div class="faq-contact-row">
+              <div class="faq-contact-icon"><i data-lucide="map-pin"></i></div>
+              <div><div style="font-size:var(--text-sm);font-weight:500;">Escritório</div><div class="faq-contact-label">Luanda, Angola</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-section">
+    <div style="position:relative;z-index:1;">
+      <div class="section-label" style="justify-content:center;margin-bottom:20px;">Começa hoje</div>
+      <h2 class="cta-title reveal">O teu futuro<br>começa com um <em>clique</em></h2>
+      <p class="cta-sub reveal">Junta-te a milhares de estudantes e instituições que já estão a crescer com o Bukoonde.</p>
+      <div class="cta-actions reveal">
+        <button class="btn-primary" style="font-size:clamp(0.9rem,2vw,1rem);padding:clamp(14px,2.5vw,18px) clamp(28px,4vw,44px);">
+          Criar conta gratuita
+          <i data-lucide="arrow-right" style="width:17px;height:17px;"></i>
+        </button>
+        <button class="btn-ghost" style="font-size:clamp(0.9rem,2vw,1rem);padding:clamp(14px,2.5vw,18px) clamp(24px,3.5vw,36px);">
+          Sou uma instituição
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="nav-logo" style="font-size:clamp(1.2rem,2.5vw,1.4rem);">buko<span>onde</span></div>
+        <p>Ecossistema digital que conecta estudantes, instituições e eventos educacionais em Angola.</p>
+        <div class="footer-socials">
+          <button class="social-btn" aria-label="Instagram"><i data-lucide="instagram"></i></button>
+          <button class="social-btn" aria-label="LinkedIn"><i data-lucide="linkedin"></i></button>
+          <button class="social-btn" aria-label="Facebook"><i data-lucide="facebook"></i></button>
+          <button class="social-btn" aria-label="Twitter / X"><i data-lucide="twitter"></i></button>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h5>Plataforma</h5>
+        <ul>
+          <li><a href="#">Cursos</a></li>
+          <li><a href="#">Eventos</a></li>
+          <li><a href="#">Instituições</a></li>
+          <li><a href="#">Como funciona</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Empresa</h5>
+        <ul>
+          <li><a href="#">Sobre nós</a></li>
+          <li><a href="#">Blog</a></li>
+          <li><a href="#">Carreiras</a></li>
+          <li><a href="#">Contacto</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Legal</h5>
+        <ul>
+          <li><a href="#">Termos de uso</a></li>
+          <li><a href="#">Privacidade</a></li>
+          <li><a href="#">Cookies</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2025 Bukoonde. Todos os direitos reservados.</span>
+      <div class="angola-tag">
+        <span class="angola-flag">🇦🇴</span>
+        Feito com orgulho em Angola
+      </div>
+    </div>
+  </footer>
+
+  <!-- Back to top -->
+  <button class="back-top" id="backTop" aria-label="Voltar ao topo">
+    <i data-lucide="chevron-up"></i>
+  </button>
+
+  <script>
+    // ── Init icons ──
+    lucide.createIcons();
+
+    // ── Navbar scroll ──
+    const navbar = document.getElementById('navbar');
+    const backTop = document.getElementById('backTop');
+
+    window.addEventListener('scroll', () => {
+      const y = window.scrollY;
+      navbar.classList.toggle('scrolled', y > 40);
+      backTop.classList.toggle('visible', y > 400);
+    }, { passive: true });
+
+    backTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+    // ── Hamburger / Drawer ──
+    const hamburger = document.getElementById('hamburger');
+    const navDrawer = document.getElementById('navDrawer');
+    let drawerOpen = false;
+
+    function toggleDrawer(state) {
+      drawerOpen = state;
+      hamburger.classList.toggle('open', state);
+      navDrawer.classList.toggle('open', state);
+      hamburger.setAttribute('aria-expanded', state);
+      document.body.style.overflow = state ? 'hidden' : '';
+    }
+
+    hamburger.addEventListener('click', () => toggleDrawer(!drawerOpen));
+
+    document.querySelectorAll('.drawer-link').forEach(link => {
+      link.addEventListener('click', () => toggleDrawer(false));
+    });
+
+    navDrawer.addEventListener('click', (e) => {
+      if (e.target === navDrawer) toggleDrawer(false);
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && drawerOpen) toggleDrawer(false);
+    });
+
+    // ── Count up ──
+    const counters = document.querySelectorAll('.count-up');
+    let counted = false;
+    function runCounters() {
+      if (counted) return;
+      counted = true;
+      counters.forEach(el => {
+        const target = parseInt(el.dataset.target);
+        const duration = 1600;
+        const step = target / (duration / 16);
+        let current = 0;
+        const timer = setInterval(() => {
+          current = Math.min(current + step, target);
+          el.textContent = Math.floor(current).toLocaleString('pt-PT');
+          if (current >= target) clearInterval(timer);
+        }, 16);
+      });
+    }
+
+    // ── Intersection observer ──
+    const revealEls = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1 });
+    revealEls.forEach(el => observer.observe(el));
+
+    const statsEl = document.querySelector('.hero-stats');
+    const statsObs = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting) runCounters();
+    }, { threshold: 0.5 });
+    if (statsEl) statsObs.observe(statsEl);
+
+    // ── Steps interaction ──
+    const steps = document.querySelectorAll('.step');
+    const panels = document.querySelectorAll('.visual-panel');
+    const dots = document.querySelectorAll('.step-dot');
+    let autoTimer;
+    let currentStep = 0;
+
+    function activateStep(i) {
+      currentStep = i;
+      steps.forEach(s => s.classList.remove('active'));
+      panels.forEach(p => p.classList.remove('active'));
+      dots.forEach(d => d.classList.remove('active'));
+      steps[i].classList.add('active');
+      const panel = document.getElementById('panel-' + i);
+      if (panel) panel.classList.add('active');
+      if (dots[i]) dots[i].classList.add('active');
+    }
+
+    steps.forEach((step, i) => {
+      step.addEventListener('click', () => {
+        clearInterval(autoTimer);
+        activateStep(i);
+        startAutoTimer();
+      });
+    });
+
+    function startAutoTimer() {
+      clearInterval(autoTimer);
+      autoTimer = setInterval(() => {
+        activateStep((currentStep + 1) % steps.length);
+      }, 3200);
+    }
+    startAutoTimer();
+
+    // ── Mobile step dots navigation ──
+    dots.forEach((dot, i) => {
+      dot.addEventListener('click', () => {
+        clearInterval(autoTimer);
+        activateStep(i);
+        startAutoTimer();
+      });
+    });
+
+    // ── Tabs ──
+    const tabBtns = document.querySelectorAll('.tab-btn');
+    const userPanels = document.querySelectorAll('.user-panel');
+
+    tabBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        tabBtns.forEach(b => { b.classList.remove('active'); b.setAttribute('aria-selected', 'false'); });
+        userPanels.forEach(p => { p.classList.remove('active'); p.style.display = 'none'; });
+        btn.classList.add('active');
+        btn.setAttribute('aria-selected', 'true');
+        const target = document.getElementById('tab-' + btn.dataset.tab);
+        if (target) {
+          target.classList.add('active');
+          target.style.display = '';
+          lucide.createIcons();
+        }
+      });
+    });
+
+    // ── FAQ accordion ──
+    document.querySelectorAll('.faq-q').forEach(q => {
+      q.addEventListener('click', () => {
+        const item = q.closest('.faq-item');
+        const isOpen = item.classList.contains('open');
+        document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+        if (!isOpen) item.classList.add('open');
+      });
+    });
+
+    // ── Responsive: show/hide mobile preview ──
+    function handleResize() {
+      const isMobile = window.innerWidth <= 768;
+      const mobilePreview = document.getElementById('mobilePreview');
+      const stepDots = document.getElementById('stepDots');
+      if (mobilePreview) mobilePreview.style.display = isMobile ? 'flex' : 'none';
+      if (stepDots) stepDots.style.display = isMobile ? 'flex' : 'none';
+    }
+    handleResize();
+    window.addEventListener('resize', handleResize, { passive: true });
+
+    // ── Swipe on mobile steps ──
+    let touchStartX = 0;
+    const stepsSection = document.getElementById('stepsList');
+    if (stepsSection) {
+      stepsSection.addEventListener('touchstart', e => { touchStartX = e.changedTouches[0].screenX; }, { passive: true });
+      stepsSection.addEventListener('touchend', e => {
+        const diff = touchStartX - e.changedTouches[0].screenX;
+        if (Math.abs(diff) > 50) {
+          clearInterval(autoTimer);
+          const next = diff > 0
+            ? (currentStep + 1) % steps.length
+            : (currentStep - 1 + steps.length) % steps.length;
+          activateStep(next);
+          startAutoTimer();
+        }
+      }, { passive: true });
+    }
+
+    // ── Re-init icons after dynamic panel changes ──
+    setTimeout(() => lucide.createIcons(), 200);
+  </script>
 </body>
-
 </html>
